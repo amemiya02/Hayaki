@@ -125,8 +125,8 @@ android {
         // Hayaki's public version is shared with iOS. Android keeps the inherited
         // monotonic build sequence and the release-type hundreds digit (3 = public).
         // Per-ABI prefixes are applied to this base below.
-        versionCode = 22600300
-        versionName = "0.2.0"
+        versionCode = 22600301
+        versionName = "0.2.1"
         testApplicationId = "com.ichi2.anki.tests"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "com.ichi2.testutils.NewCollectionPathTestRunner"
