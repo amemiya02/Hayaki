@@ -48,6 +48,6 @@ To produce debug APKs without installing them, run `./gradlew :AnkiDroid:assembl
 
 ## Project and license
 
-Hayaki is independently maintained. The Android app builds on AnkiDroid and the Anki engine, with a Kotlin, Jetpack Compose and Material 3 interface. Android and iOS share their icon, themes and public version. Android development takes place on the `redesign` branch. [AnkiDroid](https://github.com/ankidroid/Anki-Android) · [Anki](https://github.com/ankitects/anki) · [Cross-platform maintenance](docs/adr/0007-shared-hayaki-product.md)
+Hayaki is independently maintained. The Android app builds on AnkiDroid and the Anki engine, with a Kotlin, Jetpack Compose and Material 3 interface. Android and iOS share their icon, themes and public version. [AnkiDroid](https://github.com/ankidroid/Anki-Android) · [Anki](https://github.com/ankitects/anki) · [Cross-platform maintenance](docs/adr/0007-shared-hayaki-product.md)
 
 The Android app is licensed under GPL-3.0-or-later. Engine components, the public API and bundled assets carry their respective licenses. [License](COPYING) · [License notices](LICENSES/)
