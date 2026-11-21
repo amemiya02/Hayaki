@@ -38,6 +38,33 @@ class DeckPickerBackgroundTest : RobolectricTest() {
     }
 
     @Test
+    fun `the background uses the default opacity`() {
+        saveBackgroundImage(width = 10, height = 10)
+        val background = startDeckPicker().get().deckPickerBinding.background
+        advanceRobolectricLooperUntil { background.drawable != null }
+
+        assertThat(background.imageAlpha, equalTo(20))
+    }
+
+    @Test
+    fun `the background uses the chosen opacity`() {
+        saveBackgroundImage(width = 10, height = 10)
+        Prefs.backgroundImageOpacity = 50
+        val background = startDeckPicker().get().deckPickerBinding.background
+        advanceRobolectricLooperUntil { background.drawable != null }
+
+        assertThat(background.imageAlpha, equalTo(128))
+    }
+
+    @Test
+    fun `opacity percentages convert to image alpha`() {
+        assertThat(BackgroundImage.imageAlpha(0), equalTo(0))
+        assertThat(BackgroundImage.imageAlpha(8), equalTo(20))
+        assertThat(BackgroundImage.imageAlpha(100), equalTo(255))
+        assertThat(BackgroundImage.imageAlpha(150), equalTo(255))
+    }
+
+    @Test
     fun `a background that is too large is reported once`() {
         saveBackgroundImage(width = 6_000, height = 5_000)
         val controller = startDeckPicker()

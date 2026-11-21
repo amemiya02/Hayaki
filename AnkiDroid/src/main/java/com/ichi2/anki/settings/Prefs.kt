@@ -296,6 +296,12 @@ open class PrefsRepository protected constructor(
     var isCustomSyncEnabled by booleanPref(R.string.custom_sync_server_enabled_key, defaultValue = false)
     var isBackgroundEnabled by booleanPref(R.string.pref_deck_picker_background_key, defaultValue = false)
 
+    /** Opacity of the deck list background image, as a percentage. */
+    var backgroundImageOpacity by intPref(R.string.pref_background_image_opacity_key, defaultValue = 8)
+
+    /** Opacity of the deck rows drawn over the background image, as a percentage. */
+    var deckRowOpacity by intPref(R.string.pref_deck_row_opacity_key, defaultValue = 100)
+
     //endregion
 
     /**

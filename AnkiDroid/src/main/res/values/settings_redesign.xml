@@ -39,6 +39,8 @@
     <string name="settings_choose_image">Choose an image</string>
     <string name="settings_choose_image_summary">Shown behind the deck list</string>
     <string name="settings_remove_background">Remove background</string>
+    <string name="settings_background_image_opacity">Image opacity</string>
+    <string name="settings_deck_row_opacity">Deck row opacity</string>
     <string name="settings_study_screen">Study screen</string>
     <string name="settings_version">Version</string>
     <string name="settings_build_date">Build date</string>

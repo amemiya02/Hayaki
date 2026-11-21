@@ -38,6 +38,8 @@
     <string name="night_theme_key">nightTheme</string>
     <string name="pref_deck_picker_background_key">deckPickerBackground</string>
     <string name="pref_remove_wallpaper_key">removeWallPaper</string>
+    <string name="pref_background_image_opacity_key">deckPickerBackgroundOpacity</string>
+    <string name="pref_deck_row_opacity_key">deckPickerRowOpacity</string>
     <string name="center_vertically_preference">centerVertically</string>
     <string name="show_estimates_preference">showEstimates</string>
     <string name="pref_display_filenames_in_browser_key">card_browser_show_media_filenames</string>

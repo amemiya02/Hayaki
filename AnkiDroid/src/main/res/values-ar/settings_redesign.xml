@@ -28,6 +28,8 @@
     <string name="settings_choose_image">اختيار صورة</string>
     <string name="settings_choose_image_summary">تظهر خلف قائمة الرزم</string>
     <string name="settings_remove_background">إزالة الخلفية</string>
+    <string name="settings_background_image_opacity">عتامة الصورة</string>
+    <string name="settings_deck_row_opacity">عتامة صفوف الرزم</string>
     <string name="settings_study_screen">شاشة الدراسة</string>
     <string name="settings_version">الإصدار</string>
     <string name="settings_build_date">تاريخ البناء</string>

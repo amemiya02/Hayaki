@@ -153,12 +153,46 @@ private fun SliderSetting(
     modifier: Modifier,
     highlighted: Boolean,
 ) {
+    SettingsSlider(
+        title = title,
+        summary = summary,
+        value = preference.value,
+        valueRange = preference.valueFrom..preference.valueTo,
+        stepSize = preference.stepSize,
+        label = preference::valueLabel,
+        enabled = preference.isEnabled,
+        modifier = modifier,
+        highlighted = highlighted,
+        onValueChangeFinished = { proposed ->
+            if (proposed != preference.value && preference.callChangeListener(proposed)) preference.value = proposed
+            preference.value
+        },
+    )
+}
+
+/**
+ * A settings row with a slider. [onValueChangeFinished] receives the chosen value when the user
+ * lets go and returns the value actually stored, which the slider then shows.
+ */
+@Composable
+internal fun SettingsSlider(
+    title: String,
+    value: Int,
+    valueRange: IntRange,
+    onValueChangeFinished: (Int) -> Int,
+    modifier: Modifier = Modifier,
+    summary: String? = null,
+    stepSize: Float = 0f,
+    label: (Int) -> String? = { null },
+    enabled: Boolean = true,
+    highlighted: Boolean = false,
+) {
     val foundation = MaterialTheme.foundation
     val colors = foundation.colors
-    var value by remember(preference.value) { mutableFloatStateOf(preference.value.toFloat()) }
-    val range = preference.valueFrom.toFloat()..preference.valueTo.toFloat()
+    var current by remember(value) { mutableFloatStateOf(value.toFloat()) }
+    val range = valueRange.first.toFloat()..valueRange.last.toFloat()
     val span = range.endInclusive - range.start
-    val label = preference.valueLabel(value.roundToInt())
+    val valueLabel = label(current.roundToInt())
     Column(
         modifier
             .fillMaxWidth()
@@ -170,29 +204,25 @@ private fun SliderSetting(
         if (summary != null) Text(summary, style = foundation.type.caption, color = colors.onBackgroundMuted)
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             Slider(
-                value = value,
-                onValueChange = { value = it },
-                onValueChangeFinished = {
-                    val proposed = value.roundToInt()
-                    if (proposed != preference.value && preference.callChangeListener(proposed)) preference.value = proposed
-                    value = preference.value.toFloat()
-                },
+                value = current,
+                onValueChange = { current = it },
+                onValueChangeFinished = { current = onValueChangeFinished(current.roundToInt()).toFloat() },
                 modifier =
                     Modifier.weight(1f).height(foundation.spacing.touchTarget).semantics {
                         contentDescription = title
-                        if (label != null) stateDescription = label
+                        if (valueLabel != null) stateDescription = valueLabel
                     },
-                enabled = preference.isEnabled,
+                enabled = enabled,
                 valueRange = range,
-                steps = if (preference.stepSize == 0f) 0 else (span / preference.stepSize).roundToInt() - 1,
+                steps = if (stepSize == 0f) 0 else (span / stepSize).roundToInt() - 1,
                 thumb = { Box(Modifier.size(18.dp).background(colors.progressFill, CircleShape)) },
                 track = {
                     Box(Modifier.fillMaxWidth().height(3.dp).background(colors.progressTrack)) {
-                        Box(Modifier.fillMaxWidth((value - range.start) / span).height(3.dp).background(colors.progressFill))
+                        Box(Modifier.fillMaxWidth((current - range.start) / span).height(3.dp).background(colors.progressFill))
                     }
                 },
             )
-            if (label != null) Text(label, style = foundation.type.body, color = colors.onBackground)
+            if (valueLabel != null) Text(valueLabel, style = foundation.type.body, color = colors.onBackground)
         }
     }
     SettingsDivider()

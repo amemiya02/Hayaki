@@ -149,6 +149,8 @@ fun DeckListScreen(
     modifier: Modifier = Modifier,
     listState: LazyListState = rememberLazyListState(),
     contentPadding: PaddingValues = PaddingValues(),
+    /** Opacity of the deck rows, below 1 when a background image should show through them. */
+    rowOpacity: Float = 1f,
 ) {
     val context = LocalContext.current
     var animate by remember(context) { mutableStateOf(Animations.areAnimationsEnabled(context)) }
@@ -163,7 +165,15 @@ fun DeckListScreen(
             modifier = root.testTag("${LocalContext.current.packageName}:id/no_decks_placeholder"),
         )
     } else {
-        Decks(state = state, actions = actions, listState = listState, contentPadding = contentPadding, animate = animate, modifier = root)
+        Decks(
+            state = state,
+            actions = actions,
+            listState = listState,
+            contentPadding = contentPadding,
+            animate = animate,
+            rowOpacity = rowOpacity,
+            modifier = root,
+        )
     }
 }
 
@@ -194,6 +204,7 @@ private fun Decks(
     listState: LazyListState,
     contentPadding: PaddingValues,
     animate: Boolean,
+    rowOpacity: Float,
     modifier: Modifier,
 ) {
     val foundation = MaterialTheme.foundation
@@ -252,6 +263,7 @@ private fun Decks(
                     indent = indent,
                     actions = actions,
                     animate = animate,
+                    rowOpacity = rowOpacity,
                     position =
                         GroupPosition(
                             isFirst = deck.depth == 0,
@@ -466,6 +478,7 @@ private fun DeckRow(
     indent: Dp,
     actions: DeckListActions,
     animate: Boolean,
+    rowOpacity: Float,
     position: GroupPosition,
     modifier: Modifier = Modifier,
 ) {
@@ -487,7 +500,7 @@ private fun DeckRow(
                 .padding(horizontal = foundation.spacing.screenMargin)
                 .padding(top = if (position.isFirst && !position.isFirstGroup) GROUP_GAP else 0.dp)
                 .clip(shape)
-                .background(MaterialTheme.colorScheme.surfaceContainerLow)
+                .background(MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = rowOpacity))
                 .heightIn(min = if (deck.depth == 0) foundation.spacing.deckRow else foundation.spacing.deckRowNested)
                 .testTag("${LocalContext.current.packageName}:id/deck_name")
                 .onGloballyPositioned { coordinates = it }

@@ -49,6 +49,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshotFlow
@@ -353,6 +354,9 @@ open class DeckPicker :
     /** Space below the last Deck, so it scrolls clear of the add button, the bottom bar and the keyboard */
     @VisibleForTesting
     internal val deckListBottomPadding = mutableIntStateOf(0)
+
+    /** Opacity of the deck rows: the user's choice while a background image is shown, otherwise opaque. */
+    private val deckRowOpacity = mutableFloatStateOf(1f)
 
     /** The add button's menu is open: the deck list is dimmed behind it and screen readers skip it */
     private val isDeckListBehindAddMenu = mutableStateOf(false)
@@ -885,6 +889,7 @@ open class DeckPicker :
                             actions = deckListActions,
                             listState = deckListState,
                             contentPadding = PaddingValues(bottom = bottom),
+                            rowOpacity = deckRowOpacity.floatValue,
                         )
                     }
                 }
@@ -1409,8 +1414,10 @@ open class DeckPicker :
             showBackgroundImageError(result.message(this))
         }
         val drawable = (result as? BackgroundImage.ResolveResult.Ready)?.drawable
-        // Over worst-case black or white pixels, the Foundation's deck text still meets AA contrast.
-        deckPickerBinding.background.imageAlpha = 20
+        // The default opacity keeps the Foundation's deck text at AA contrast over worst-case black or white
+        // pixels. Higher opacities are the user's choice.
+        deckPickerBinding.background.imageAlpha = BackgroundImage.imageAlpha(Prefs.backgroundImageOpacity)
+        deckRowOpacity.floatValue = if (drawable != null) Prefs.deckRowOpacity.coerceIn(0, 100) / 100f else 1f
         deckPickerBinding.background.setImageDrawableSafe(drawable) {
             showBackgroundImageError(getString(CommonString.background_image_too_large))
         }

@@ -77,6 +77,10 @@ internal data class AppearanceSettingsState(
     val nightTheme: NightTheme,
     val theme: HayakiTheme,
     val hasBackground: Boolean,
+    /** Percentage opacity of the background image. */
+    val backgroundImageOpacity: Int = 8,
+    /** Percentage opacity of the deck rows over the background image. */
+    val deckRowOpacity: Int = 100,
 )
 
 @Composable
@@ -89,6 +93,8 @@ internal fun AppearanceSettingsScreen(
     onNightThemeChange: (NightTheme) -> Unit,
     onChooseBackground: () -> Unit,
     onRemoveBackground: () -> Unit,
+    onBackgroundImageOpacityChange: (Int) -> Int = { it },
+    onDeckRowOpacityChange: (Int) -> Int = { it },
 ) {
     val foundation = MaterialTheme.foundation
     var choosingTheme by rememberSaveable { mutableStateOf(false) }
@@ -159,6 +165,33 @@ internal fun AppearanceSettingsScreen(
                 highlighted = highlighted,
                 modifier = modifier,
             )
+        }
+        if (state.hasBackground) {
+            SettingsDivider()
+            SettingsSearchTarget(searchTarget == stringResource(R.string.pref_background_image_opacity_key)) { modifier, highlighted ->
+                SettingsSlider(
+                    title = stringResource(R.string.settings_background_image_opacity),
+                    value = state.backgroundImageOpacity,
+                    valueRange = 0..100,
+                    stepSize = 1f,
+                    label = { "$it%" },
+                    onValueChangeFinished = onBackgroundImageOpacityChange,
+                    highlighted = highlighted,
+                    modifier = modifier,
+                )
+            }
+            SettingsSearchTarget(searchTarget == stringResource(R.string.pref_deck_row_opacity_key)) { modifier, highlighted ->
+                SettingsSlider(
+                    title = stringResource(R.string.settings_deck_row_opacity),
+                    value = state.deckRowOpacity,
+                    valueRange = 0..100,
+                    stepSize = 1f,
+                    label = { "$it%" },
+                    onValueChangeFinished = onDeckRowOpacityChange,
+                    highlighted = highlighted,
+                    modifier = modifier,
+                )
+            }
         }
     }
     if (choosingTheme) {

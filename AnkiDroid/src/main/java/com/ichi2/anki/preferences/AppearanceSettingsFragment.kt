@@ -66,6 +66,16 @@ class AppearanceSettingsFragment : Fragment() {
                 onNightThemeChange = ::changeNightTheme,
                 onChooseBackground = ::chooseBackground,
                 onRemoveBackground = { removeDialog = true },
+                onBackgroundImageOpacityChange = { opacity ->
+                    Prefs.backgroundImageOpacity = opacity.coerceIn(0, 100)
+                    updateAppearance()
+                    Prefs.backgroundImageOpacity
+                },
+                onDeckRowOpacityChange = { opacity ->
+                    Prefs.deckRowOpacity = opacity.coerceIn(0, 100)
+                    updateAppearance()
+                    Prefs.deckRowOpacity
+                },
             )
             if (removeDialog) {
                 ConfirmationDialog(
@@ -97,6 +107,8 @@ class AppearanceSettingsFragment : Fragment() {
                 Prefs.nightTheme,
                 Prefs.hayakiTheme,
                 BackgroundImage.shouldBeShown(requireContext()),
+                backgroundImageOpacity = Prefs.backgroundImageOpacity,
+                deckRowOpacity = Prefs.deckRowOpacity,
             )
         (parentFragment as? PreferencesFragment)?.refreshSearchIndex()
     }

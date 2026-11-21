@@ -41,6 +41,9 @@ object BackgroundImage {
      */
     const val FILENAME = "DeckPickerBackground.png"
 
+    /** Converts a percentage opacity to an [android.widget.ImageView.setImageAlpha] value. */
+    fun imageAlpha(opacityPercent: Int): Int = (opacityPercent.coerceIn(0, 100) * 255 + 50) / 100
+
     fun shouldBeShown(context: Context) = Prefs.isBackgroundEnabled && getImageFile(context) != null
 
     /** Outcome of resolving the user's [DeckPicker] background. */

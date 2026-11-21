@@ -38,6 +38,8 @@
     <string name="settings_choose_image">选择图片</string>
     <string name="settings_choose_image_summary">显示在牌组列表后面</string>
     <string name="settings_remove_background">移除背景</string>
+    <string name="settings_background_image_opacity">图片不透明度</string>
+    <string name="settings_deck_row_opacity">卡组行不透明度</string>
     <string name="settings_study_screen">学习界面</string>
     <string name="settings_version">版本</string>
     <string name="settings_build_date">构建日期</string>

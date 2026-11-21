@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.ichi2.anki.CollectionManager.TR
 import com.ichi2.anki.CommonString
 import com.ichi2.anki.R
+import com.ichi2.anki.deckpicker.BackgroundImage
 import com.ichi2.anki.preferences.reviewer.ReviewerMenuSettingsFragment
 import com.ichi2.anki.preferences.reviewer.ViewerAction
 import com.ichi2.anki.ui.internationalization.sentenceCase
@@ -134,6 +135,22 @@ private fun Context.appearanceSearchEntries(path: String): List<SettingsSearchEn
                 R.string.settings_deck_list_background,
             ),
         )
+        if (BackgroundImage.shouldBeShown(this@appearanceSearchEntries)) {
+            add(
+                appearance(
+                    R.string.settings_background_image_opacity,
+                    R.string.pref_background_image_opacity_key,
+                    R.string.settings_deck_list_background,
+                ),
+            )
+            add(
+                appearance(
+                    R.string.settings_deck_row_opacity,
+                    R.string.pref_deck_row_opacity_key,
+                    R.string.settings_deck_list_background,
+                ),
+            )
+        }
     }
 }
 
