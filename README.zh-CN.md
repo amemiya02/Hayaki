@@ -7,8 +7,6 @@
 <p align="center">用自己的 Anki 牌组，离线学习和复习。</p>
 <p align="center">
   <a href="https://github.com/amemiya02/Hayaki/releases/latest"><img src="https://img.shields.io/github/v/release/amemiya02/Hayaki?label=Hayaki&amp;color=67539a" alt="最新正式版"></a>
-  <a href="https://github.com/amemiya02/Hayaki/actions/workflows/tests_unit.yml?query=branch%3Amain+event%3Apush"><img src="https://github.com/amemiya02/Hayaki/actions/workflows/tests_unit.yml/badge.svg?branch=main&amp;event=push" alt="单元测试"></a>
-  <a href="https://github.com/amemiya02/Hayaki/actions/workflows/tests_emulator.yml?query=branch%3Amain+event%3Apush"><img src="https://github.com/amemiya02/Hayaki/actions/workflows/tests_emulator.yml/badge.svg?branch=main&amp;event=push" alt="模拟器测试"></a>
   <a href="https://github.com/amemiya02/Hayaki/actions/workflows/lint.yml?query=branch%3Amain+event%3Apush"><img src="https://github.com/amemiya02/Hayaki/actions/workflows/lint.yml/badge.svg?branch=main&amp;event=push" alt="代码质量检查"></a>
   <a href="#安装与构建"><img src="https://img.shields.io/badge/Android-7.0%2B-3DDC84?logo=android&amp;logoColor=white" alt="支持 Android 7.0 及以上版本"></a>
   <a href="gradle/libs.versions.toml"><img src="https://img.shields.io/badge/target%20SDK-36-3DDC84?logo=android&amp;logoColor=white" alt="目标 SDK 36"></a>

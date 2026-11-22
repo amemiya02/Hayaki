@@ -7,8 +7,6 @@
 <p align="center">An offline flashcard app for your Anki collection.</p>
 <p align="center">
   <a href="https://github.com/amemiya02/Hayaki/releases/latest"><img src="https://img.shields.io/github/v/release/amemiya02/Hayaki?label=Hayaki&amp;color=67539a" alt="Latest release"></a>
-  <a href="https://github.com/amemiya02/Hayaki/actions/workflows/tests_unit.yml?query=branch%3Amain+event%3Apush"><img src="https://github.com/amemiya02/Hayaki/actions/workflows/tests_unit.yml/badge.svg?branch=main&amp;event=push" alt="Unit tests"></a>
-  <a href="https://github.com/amemiya02/Hayaki/actions/workflows/tests_emulator.yml?query=branch%3Amain+event%3Apush"><img src="https://github.com/amemiya02/Hayaki/actions/workflows/tests_emulator.yml/badge.svg?branch=main&amp;event=push" alt="Emulator tests"></a>
   <a href="https://github.com/amemiya02/Hayaki/actions/workflows/lint.yml?query=branch%3Amain+event%3Apush"><img src="https://github.com/amemiya02/Hayaki/actions/workflows/lint.yml/badge.svg?branch=main&amp;event=push" alt="Code quality checks"></a>
   <a href="#install-or-build"><img src="https://img.shields.io/badge/Android-7.0%2B-3DDC84?logo=android&amp;logoColor=white" alt="Android 7.0 or later"></a>
   <a href="gradle/libs.versions.toml"><img src="https://img.shields.io/badge/target%20SDK-36-3DDC84?logo=android&amp;logoColor=white" alt="Targets Android SDK 36"></a>

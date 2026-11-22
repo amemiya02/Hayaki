@@ -59,9 +59,10 @@ jobs:
       - name: Gradle Dependency Download
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
         with:
-          timeout_minutes: 10
-          retry_wait_seconds: 60
-          max_attempts: 3
+          timeout_minutes: 15
+          # Maven Central answers bursts with 429 Too Many Requests: back off for longer
+          retry_wait_seconds: 180
+          max_attempts: 5
           command: ./gradlew robolectricSdkDownload --daemon
 
       # update workflows/README.md when modifying this step
