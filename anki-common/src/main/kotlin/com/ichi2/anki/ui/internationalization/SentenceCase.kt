@@ -244,6 +244,9 @@ object SentenceCase {
     val copyDebugInfo get() = TR.errorsCopyDebugInfoButton().toSentenceCase(R.string.sentence_copy_debug_info)
 
     context(_: Context)
+    val checkForUpdates get() = TR.addonsCheckForUpdates().toSentenceCase(R.string.sentence_check_for_updates)
+
+    context(_: Context)
     val addField get() = TR.fieldsAddField().toSentenceCase(R.string.sentence_add_field)
 
     context(_: Context)

@@ -58,9 +58,7 @@ class DailyDecksTest : RobolectricTest() {
             composeRule.onNodeWithText("3 cards to study today").performScrollTo().assertIsDisplayed()
             awaitText("0 studied so far")
             composeRule.onNodeWithText("0 studied so far").performScrollTo().assertIsDisplayed()
-            composeRule.onNodeWithText("New: 2").assertIsDisplayed()
-            composeRule.onNodeWithText("Learning: 0").assertIsDisplayed()
-            composeRule.onNodeWithText("Due: 1").assertIsDisplayed()
+            composeRule.onNodeWithContentDescription("New: 2, Learning: 0, Due: 1").assertIsDisplayed()
         }
     }
 
@@ -71,9 +69,7 @@ class DailyDecksTest : RobolectricTest() {
 
         withDeckPicker(deckCount = 0) {
             composeRule.onNodeWithText("Nothing left to study today").assertIsDisplayed()
-            composeRule.onNodeWithText("New: 0").assertIsDisplayed()
-            composeRule.onNodeWithText("Learning: 0").assertIsDisplayed()
-            composeRule.onNodeWithText("Due: 0").assertIsDisplayed()
+            composeRule.onNodeWithContentDescription("New: 0, Learning: 0, Due: 0").assertIsDisplayed()
             composeRule.onNodeWithText("No decks yet").assertDoesNotExist()
         }
     }
@@ -100,7 +96,7 @@ class DailyDecksTest : RobolectricTest() {
 
             awaitText("1 studied so far")
             composeRule.onNodeWithText("1 card to study today").performScrollTo().assertIsDisplayed()
-            composeRule.onNodeWithText("New: 1").assertIsDisplayed()
+            composeRule.onNodeWithContentDescription("New: 1, Learning: 0, Due: 0").assertIsDisplayed()
             composeRule.onNodeWithText("Study · N3").assertDoesNotExist()
         }
     }

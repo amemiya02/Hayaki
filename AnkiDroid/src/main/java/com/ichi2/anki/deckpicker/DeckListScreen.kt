@@ -361,7 +361,7 @@ private fun TodaySummary(
 @Composable
 private fun TodayQueueCounts(counts: Counts) {
     val foundation = MaterialTheme.foundation
-    val locale = ConfigurationCompat.getLocales(LocalConfiguration.current)[0] ?: java.util.Locale.getDefault()
+    val locale = LocalConfiguration.current.locales[0]
     val format = remember(locale) { NumberFormat.getIntegerInstance(locale) }
     val totals =
         Queue.entries.map { queue ->

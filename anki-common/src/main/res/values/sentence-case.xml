@@ -68,6 +68,7 @@ undoActionUndone()
     <string name="sentence_ankiweb_account" maxLength="41">AnkiWeb account</string>
     <string name="sentence_browser_appearance">Browser appearance</string>
     <string name="sentence_copy_debug_info">Copy debug info</string>
+    <string name="sentence_check_for_updates">Check for updates</string>
     <string name="sentence_add_field" maxLength="28">Add field</string>
     <string name="sentence_all_decks">All decks</string>
     <string name="sentence_anki_collection_package">Anki collection package</string>

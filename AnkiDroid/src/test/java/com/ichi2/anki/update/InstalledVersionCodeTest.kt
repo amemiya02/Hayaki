@@ -26,7 +26,6 @@ class InstalledVersionCodeTest {
                 packageName = context.packageName
                 @Suppress("DEPRECATION")
                 versionCode = 322_600_302
-                longVersionCode = 322_600_302
             }
         shadowOf(context.packageManager).installPackage(installed)
 

@@ -11,9 +11,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ichi2.anki.CollectionManager.TR
 import com.ichi2.anki.CommonString
 import com.ichi2.anki.common.utils.android.showThemedToast
 import com.ichi2.compose.ui.dialogs.ConfirmationDialog
@@ -25,8 +27,9 @@ import com.ichi2.compose.ui.dialogs.ProgressDialog
 @Composable
 fun UpdateDialogs(viewModel: UpdateViewModel) {
     val context = LocalContext.current
+    val resources = LocalResources.current
     LaunchedEffect(viewModel) {
-        viewModel.messages.collect { showThemedToast(context, context.getString(it), shortLength = false) }
+        viewModel.messages.collect { showThemedToast(context, resources.getString(it), shortLength = false) }
     }
     when (val state = viewModel.state.collectAsStateWithLifecycle().value) {
         UpdateUiState.Idle -> Unit
@@ -34,7 +37,7 @@ fun UpdateDialogs(viewModel: UpdateViewModel) {
             ConfirmationDialog(
                 title = stringResource(CommonString.update_available_title, state.update.version.toString()),
                 message = "",
-                confirm = DialogAction(stringResource(CommonString.update_action), viewModel::startUpdate),
+                confirm = DialogAction(TR.importingUpdate(), viewModel::startUpdate),
                 dismissText = stringResource(CommonString.update_later),
                 onDismissRequest = viewModel::dismiss,
             ) {

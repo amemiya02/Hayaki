@@ -61,6 +61,9 @@ object SentenceCaseExtension {
     fun checkDatabase() = resourceCase(tr().databaseCheckTitle(), R.string.sentence_check_db)
 
     @Composable
+    fun checkForUpdates() = resourceCase(tr().addonsCheckForUpdates(), R.string.sentence_check_for_updates)
+
+    @Composable
     fun checkMediaTitle() = resourceCase(tr().mediaCheckWindowTitle(), R.string.sentence_check_media)
 
     @Composable
