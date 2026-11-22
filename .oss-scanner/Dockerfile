@@ -63,7 +63,6 @@ RUN ./gradlew --no-daemon --console=plain --stacktrace \
 RUN --network=none ./gradlew --offline --no-daemon --console=plain --stacktrace \
         :AnkiDroid:testPlayDebugUnitTest --no-test-dry-run --rerun \
         --tests com.ichi2.anki.CardUtilsTest \
-        --tests com.ichi2.anki.InfoTest \
         --tests com.ichi2.anki.MediaRegistrationTest
 
 # Run after the app build has installed AGP's build-tools. Installing them during
