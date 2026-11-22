@@ -3,6 +3,7 @@
 package com.ichi2.anki.preferences.reviewer
 
 import android.content.Context
+import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.view.menu.MenuBuilder
@@ -29,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -58,6 +60,9 @@ class ReviewerMenuView(
     context: Context,
 ) : AbstractComposeView(context) {
     private var menuVersion by mutableIntStateOf(0)
+
+    /** Resolves the menu's icons, so the monochrome ones take the text colour */
+    private val iconContext = ContextThemeWrapper(context, R.style.ThemeOverlay_Hayaki_ReviewerMenu)
     private val frontMenu = newMenu()
     private val overflowMenu = newMenu()
     private var onMenuItemClickListener: ActionMenuView.OnMenuItemClickListener? = null
@@ -73,7 +78,7 @@ class ReviewerMenuView(
     }
 
     private fun newMenu() =
-        object : MenuBuilder(context) {
+        object : MenuBuilder(iconContext) {
             override fun onItemsChanged(structureChanged: Boolean) {
                 super.onItemsChanged(structureChanged)
                 menuVersion++
@@ -195,7 +200,8 @@ class ReviewerMenuView(
         version: Int,
     ) {
         val icon = androidx.compose.runtime.remember(item, version) { item.icon?.toBitmap()?.asImageBitmap() }
-        icon?.let { Image(it, contentDescription = null, Modifier.size(24.dp)) }
+        val alpha = if (item.isEnabled) 1f else DISABLED_ALPHA
+        icon?.let { Image(it, contentDescription = null, Modifier.size(24.dp).alpha(alpha)) }
     }
 
     fun addActions(
@@ -208,7 +214,7 @@ class ReviewerMenuView(
         for (action in ViewerAction.entries.filter { it.parentMenu != null }) {
             val subMenu = findItem(action.parentMenu!!.menuId)?.subMenu ?: continue
             subMenu.add(Menu.NONE, action.menuId, Menu.NONE, action.title(context)).apply {
-                action.drawableRes?.let { setIconRes(context, it) }
+                action.drawableRes?.let { setIconRes(iconContext, it) }
             }
         }
     }
@@ -235,8 +241,11 @@ class ReviewerMenuView(
                 } else {
                     menu.add(Menu.NONE, action.menuId, Menu.NONE, title)
                 }
-            action.drawableRes?.let { item.setIconRes(context, it) }
+            action.drawableRes?.let { item.setIconRes(iconContext, it) }
             item.setShowAsAction(menuActionType)
         }
     }
 }
+
+/** Material's opacity for disabled content */
+private const val DISABLED_ALPHA = 0.38f

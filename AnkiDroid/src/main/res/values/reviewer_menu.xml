@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The study screen's menu icons take the text colour. Material's default
+         colorControlNormal is a muted grey that reads as disabled. -->
+    <style name="ThemeOverlay.Hayaki.ReviewerMenu" parent="">
+        <item name="colorControlNormal">?attr/foundationOnBackground</item>
+    </style>
+</resources>
