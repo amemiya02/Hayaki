@@ -43,6 +43,20 @@ object ApkInstaller {
             params.setPackageSource(PackageInstaller.PACKAGE_SOURCE_DOWNLOADED_FILE)
         }
         val sessionId = installer.createSession(params)
+        try {
+            commit(context, installer, sessionId, apk)
+        } catch (e: Exception) {
+            installer.abandonSession(sessionId)
+            throw e
+        }
+    }
+
+    private fun commit(
+        context: Context,
+        installer: PackageInstaller,
+        sessionId: Int,
+        apk: File,
+    ) {
         installer.openSession(sessionId).use { session ->
             apk.inputStream().use { input ->
                 session.openWrite(apk.name, 0, apk.length()).use { output ->

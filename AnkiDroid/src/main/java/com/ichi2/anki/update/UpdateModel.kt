@@ -141,6 +141,17 @@ fun parseSha256Sums(text: String): Map<String, String> =
 
 private val CHECK_INTERVAL_MILLIS = 24.hours.inWholeMilliseconds
 
+private val RETRY_AFTER_FAILURE_MILLIS = 1.hours.inWholeMilliseconds
+
+/**
+ * The check time to record after [result]: now, or after a failure (offline, GitHub down) a time
+ * that makes the next check due in an hour rather than a day.
+ */
+fun nextLastCheckMillis(
+    result: UpdateCheck,
+    nowMillis: Long,
+): Long = if (result is UpdateCheck.Failed) nowMillis - CHECK_INTERVAL_MILLIS + RETRY_AFTER_FAILURE_MILLIS else nowMillis
+
 /** True when 24 hours have passed since [lastCheckMillis], or the clock has moved back past it. */
 fun isCheckDue(
     lastCheckMillis: Long,

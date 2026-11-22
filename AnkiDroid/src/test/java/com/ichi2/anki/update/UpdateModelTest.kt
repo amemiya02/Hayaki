@@ -125,4 +125,16 @@ class UpdateModelTest {
         assertThat(isCheckDue(1_000, 1_000 + day), equalTo(true))
         assertThat(isCheckDue(5_000, 1_000), equalTo(true))
     }
+
+    @Test
+    fun `a failed check is retried after an hour, a successful one after a day`() {
+        val now = 100.hours.inWholeMilliseconds
+        val failed = nextLastCheckMillis(UpdateCheck.Failed("offline"), now)
+        assertThat(isCheckDue(failed, now + 1.hours.inWholeMilliseconds - 1), equalTo(false))
+        assertThat(isCheckDue(failed, now + 1.hours.inWholeMilliseconds), equalTo(true))
+
+        val succeeded = nextLastCheckMillis(UpdateCheck.UpToDate, now)
+        assertThat(isCheckDue(succeeded, now + 1.hours.inWholeMilliseconds), equalTo(false))
+        assertThat(isCheckDue(succeeded, now + 24.hours.inWholeMilliseconds), equalTo(true))
+    }
 }

@@ -70,7 +70,7 @@ class UpdateViewModel(
         checkJob =
             viewModelScope.launch {
                 val result = checker.check(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE.toLong())
-                Prefs.lastUpdateCheckMillis = System.currentTimeMillis()
+                Prefs.lastUpdateCheckMillis = nextLastCheckMillis(result, System.currentTimeMillis())
                 when (result) {
                     is UpdateCheck.Available -> _state.value = UpdateUiState.Available(result)
                     UpdateCheck.UpToDate -> if (manual) _messages.send(CommonString.update_up_to_date)
@@ -114,7 +114,8 @@ class UpdateViewModel(
                     _messages.send(
                         if (e is ChecksumMismatchException) CommonString.update_verify_failed else CommonString.update_download_failed,
                     )
-                } catch (e: SecurityException) {
+                } catch (e: Exception) {
+                    // PackageInstaller reports a refused session as SecurityException or IllegalStateException
                     Timber.w(e, "Update install failed")
                     _messages.send(CommonString.update_download_failed)
                 }
