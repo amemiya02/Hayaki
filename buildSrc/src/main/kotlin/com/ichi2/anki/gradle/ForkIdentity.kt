@@ -11,7 +11,7 @@ package com.ichi2.anki.gradle
  */
 object ForkIdentity {
     /** The application ID of a release build. */
-    const val APPLICATION_ID = "com.ichi2.anki.redesign"
+    const val APPLICATION_ID = "io.github.amemiya02.hayaki"
 
     /** Appended to [APPLICATION_ID] for debug builds. */
     const val DEBUG_SUFFIX = ".debug"

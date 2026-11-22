@@ -15,7 +15,7 @@ class CoverageCopyTest(unittest.TestCase):
     def test_coverage_is_read_from_the_built_application(self):
         coverage = b"device coverage"
         checksum = hashlib.sha256(coverage).hexdigest().encode()
-        application_id = "com.ichi2.anki.redesign"
+        application_id = "io.github.amemiya02.hayaki"
 
         with tempfile.TemporaryDirectory() as directory:
             metadata = Path(directory) / "output-metadata.json"

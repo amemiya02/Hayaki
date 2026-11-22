@@ -4,7 +4,7 @@
 set -euo pipefail
 shopt -s nullglob
 
-package=com.ichi2.anki.redesign
+package=io.github.amemiya02.hayaki
 runner=com.ichi2.anki.tests/com.ichi2.testutils.NewCollectionPathTestRunner
 core_loop=com.ichi2.anki.HayakiReleaseCoreLoopTest
 webview_tests='com.ichi2.anki.ReviewerFragmentTest#templatesKeepTheirCanvasAndPlainCardsFollowAppearanceWhenReviewerReopens,com.ichi2.anki.pages.AnkiPageAppearanceTest,com.ichi2.anki.CardViewerMathJaxTest'

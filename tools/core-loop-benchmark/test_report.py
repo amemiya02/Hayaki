@@ -19,24 +19,24 @@ class ReportTest(unittest.TestCase):
         snapshot = '<hierarchy><node text="Decks" /></hierarchy>'
         killed = subprocess.CalledProcessError(137, ["uiautomator", "dump"])
         with patch("subprocess.check_output", side_effect=[killed, dump, snapshot]):
-            nodes = list(Device("emulator-5554", "com.ichi2.anki.redesign.perf").nodes())
+            nodes = list(Device("emulator-5554", "io.github.amemiya02.hayaki.perf").nodes())
         self.assertEqual([node.get("text") for node in nodes], ["Decks"])
 
     def test_browse_rows_remain_measurable_after_the_result_count_scrolls_away(self):
-        snapshot = '<hierarchy><node package="com.ichi2.anki.redesign.perf" text="Browser fixture 00117" /></hierarchy>'
+        snapshot = '<hierarchy><node package="io.github.amemiya02.hayaki.perf" text="Browser fixture 00117" /></hierarchy>'
         with patch("subprocess.check_output", side_effect=["UI hierarchy dumped to: /data/local/tmp/window.xml", snapshot]):
-            rows = Device("emulator-5554", "com.ichi2.anki.redesign.perf").browsing()
+            rows = Device("emulator-5554", "io.github.amemiya02.hayaki.perf").browsing()
         self.assertEqual(rows, ["Browser fixture 00117"])
 
     def test_browse_clears_an_empty_deck_filter_before_counting(self):
         snapshot = """<hierarchy>
-            <node package="com.ichi2.anki.redesign.perf" text="No cards match" />
-            <node package="com.ichi2.anki.redesign.perf" text="Clear" bounds="[20,20][40,40]" />
+            <node package="io.github.amemiya02.hayaki.perf" text="No cards match" />
+            <node package="io.github.amemiya02.hayaki.perf" text="Clear" bounds="[20,20][40,40]" />
         </hierarchy>"""
         dump = "UI hierarchy dumped to: /data/local/tmp/window.xml"
         with patch("subprocess.check_output", side_effect=[dump, snapshot, dump, snapshot, ""]) as adb:
             with self.assertRaisesRegex(ValueError, "Browse did not report 100,000 Cards"):
-                Device("emulator-5554", "com.ichi2.anki.redesign.perf").browsing(verify_count=True)
+                Device("emulator-5554", "io.github.amemiya02.hayaki.perf").browsing(verify_count=True)
         adb.assert_called_with(["adb", "-s", "emulator-5554", "shell", "input tap 30 30"], text=True, timeout=90)
 
     def test_reports_only_new_valid_frames_and_uses_androids_deadline(self):

@@ -324,7 +324,7 @@ def main():
     run = commands.add_parser("capture", help="capture a run on a prepared Android device")
     run.add_argument("--serial", required=True)
     run.add_argument(
-        "--package", default="com.ichi2.anki.redesign.perf",
+        "--package", default="io.github.amemiya02.hayaki.perf",
         help="package whose study progress will change on the disposable device",
     )
     run.add_argument("--revision", required=True, help="source commit of the installed APK")

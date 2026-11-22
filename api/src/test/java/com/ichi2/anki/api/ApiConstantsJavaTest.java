@@ -11,7 +11,7 @@ import org.junit.Test;
 public class ApiConstantsJavaTest {
     @Test
     public void exposesLegacyConstants() {
-        String ankiPackageName = BuildConfig.DEBUG ? "com.ichi2.anki.redesign.debug" : "com.ichi2.anki.redesign";
+        String ankiPackageName = BuildConfig.DEBUG ? "io.github.amemiya02.hayaki.debug" : "io.github.amemiya02.hayaki";
         assertEquals(ankiPackageName + ".flashcards", FlashCardsContract.AUTHORITY);
         assertEquals(
                 ankiPackageName + ".permission.READ_WRITE_DATABASE",

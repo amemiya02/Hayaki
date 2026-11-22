@@ -118,7 +118,7 @@ class ForkIdentityTest {
     }
 
     companion object {
-        const val FORK_APPLICATION_ID = "com.ichi2.anki.redesign"
+        const val FORK_APPLICATION_ID = "io.github.amemiya02.hayaki"
         val OFFICIAL_APPLICATION_IDS = listOf("com.ichi2.anki", "com.ichi2.anki.debug")
     }
 }

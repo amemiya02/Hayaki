@@ -2,9 +2,9 @@
     <!--
     In Anki-Android:AndroidManifest.xml 'applicationId' defines the permission/authority for the API
 
-    (com.ichi2.anki.redesign.permission.xxx)       - live    (the Fork)
-    (com.ichi2.anki.redesign.debug.permission.xxx) - disabled (the Fork:Dev)
-    (com.ichi2.anki.redesign.a.permission.xxx)     - disabled (the Fork:Parallel.A)
+    (io.github.amemiya02.hayaki.permission.xxx)       - live    (the Fork)
+    (io.github.amemiya02.hayaki.debug.permission.xxx) - disabled (the Fork:Dev)
+    (io.github.amemiya02.hayaki.a.permission.xxx)     - disabled (the Fork:Parallel.A)
 
     This caused a problem with integration test builds (androidTest)
     These run under '.debug', but require a working API where we can test permissions
