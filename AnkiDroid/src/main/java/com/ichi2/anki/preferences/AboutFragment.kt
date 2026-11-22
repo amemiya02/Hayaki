@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.ichi2.anki.AnkiDroidApp
 import com.ichi2.anki.BuildConfig
 import com.ichi2.anki.CollectionManager.TR
@@ -25,6 +26,8 @@ import com.ichi2.anki.scheduling.Fsrs
 import com.ichi2.anki.servicelayer.DebugInfoService
 import com.ichi2.anki.settings.Prefs
 import com.ichi2.anki.ui.internationalization.sentenceCase
+import com.ichi2.anki.update.UpdateDialogs
+import com.ichi2.anki.update.UpdateViewModel
 import com.ichi2.anki.utils.ext.showDialogFragment
 import com.ichi2.anki.utils.openUrl
 import com.ichi2.utils.IntentUtil
@@ -40,6 +43,8 @@ import net.ankiweb.rsdroid.BuildConfig as BackendBuildConfig
 
 class AboutFragment : Fragment() {
     private var developerClicks by mutableStateOf(0)
+    private var updateCheckEnabled by mutableStateOf(Prefs.isUpdateCheckEnabled)
+    private val updateViewModel: UpdateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +73,7 @@ class AboutFragment : Fragment() {
                 backendVersion,
                 Fsrs.displayVersion?.let { "($it)" },
                 TR.sentenceCase.copyDebugInfo,
+                updateCheckEnabled,
             )
         return settingsComposeView(R.id.settings_about) {
             AboutScreen(
@@ -84,7 +90,13 @@ class AboutFragment : Fragment() {
                 },
                 onChangelog = { navigate(ChangelogDestination) },
                 onCopyDebugInfo = ::copyDebugInfo,
+                onCheckForUpdates = updateViewModel::checkNow,
+                onUpdateCheckEnabledChange = {
+                    Prefs.isUpdateCheckEnabled = it
+                    updateCheckEnabled = it
+                },
             )
+            UpdateDialogs(updateViewModel)
             if (developerClicks == CLICK_LIMIT && !Prefs.isDeveloperOptionsEnabled) {
                 EnableDeveloperOptionsDialog(
                     onCancel = { developerClicks = 0 },

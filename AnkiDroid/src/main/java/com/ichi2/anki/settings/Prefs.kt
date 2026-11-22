@@ -294,6 +294,11 @@ open class PrefsRepository protected constructor(
 
     @set:VisibleForTesting
     var isCustomSyncEnabled by booleanPref(R.string.custom_sync_server_enabled_key, defaultValue = false)
+
+    /** Whether the deck list checks GitHub for a newer Hayaki, at most once a day. */
+    var isUpdateCheckEnabled by booleanPref(R.string.pref_update_check_key, defaultValue = true)
+    var lastUpdateCheckMillis by longPref(R.string.last_update_check_key, defaultValue = 0L)
+
     var isBackgroundEnabled by booleanPref(R.string.pref_deck_picker_background_key, defaultValue = false)
 
     /** Opacity of the deck list background image, as a percentage. */

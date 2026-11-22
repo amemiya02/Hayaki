@@ -28,6 +28,8 @@
          AllPermissionsExplanation fragment (see ui.windows.permissions) -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage"/>
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- The in-app updater installs release APKs from GitHub -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -449,6 +451,9 @@
         <!-- Copy Sync Error Message to Clipboard -->
         <receiver android:name=".worker.CancelMediaSyncReceiver" android:exported="false" />
 
+        <receiver
+            android:name="com.ichi2.anki.update.InstallResultReceiver"
+            android:exported="false" />
         <receiver
             android:name="com.ichi2.anki.receiver.CopyToClipboardReceiver"
             android:exported="false" />

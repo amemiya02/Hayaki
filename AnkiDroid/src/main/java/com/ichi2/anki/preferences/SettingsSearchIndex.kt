@@ -184,6 +184,8 @@ private fun Context.aboutSearchEntries(path: String): List<SettingsSearchEntry> 
         SettingsSearchEntry(getString(CommonString.license), path, AboutFragment::class, "about_license_title"),
         SettingsSearchEntry(getString(R.string.settings_source_code), path, AboutFragment::class, "license_description"),
         SettingsSearchEntry(getString(CommonString.open_changelog), path, AboutFragment::class, "open_changelog"),
+        SettingsSearchEntry(getString(CommonString.update_check_title), path, AboutFragment::class, "check_for_updates"),
+        SettingsSearchEntry(getString(CommonString.update_check_auto), path, AboutFragment::class, "auto_check_for_updates"),
         SettingsSearchEntry(TR.sentenceCase.copyDebugInfo, path, AboutFragment::class, "copy_debug_info"),
     )
 

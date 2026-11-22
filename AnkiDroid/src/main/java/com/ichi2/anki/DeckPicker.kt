@@ -231,6 +231,8 @@ import com.ichi2.anki.ui.ResizablePaneManager
 import com.ichi2.anki.ui.internationalization.sentenceCase
 import com.ichi2.anki.ui.windows.permissions.PermissionsActivity
 import com.ichi2.anki.ui.windows.reviewer.ReviewerFragment
+import com.ichi2.anki.update.UpdateDialogs
+import com.ichi2.anki.update.UpdateViewModel
 import com.ichi2.anki.utils.Destination
 import com.ichi2.anki.utils.ShortcutUtils
 import com.ichi2.anki.utils.ext.collectInLifecycle
@@ -323,6 +325,7 @@ open class DeckPicker :
     val viewModel: DeckPickerViewModel by viewModels()
 
     private val importViewModel: ImportViewModel by viewModels()
+    private val updateViewModel: UpdateViewModel by viewModels()
 
     internal lateinit var binding: DeckPickerLayout
         private set
@@ -893,6 +896,7 @@ open class DeckPicker :
                         )
                     }
                 }
+                UpdateDialogs(updateViewModel)
             }
         }
     }
@@ -1798,6 +1802,7 @@ open class DeckPicker :
                 refreshState()
             }
             viewModel.onScreenResumed()
+            updateViewModel.checkAutomatically()
         }
         message?.let { dialogHandler.sendStoredMessage(it) }
     }

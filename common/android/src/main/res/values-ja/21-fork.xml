@@ -37,4 +37,16 @@
     <string name="deck_list_deck_actions">デッキの操作</string>
     <string name="export_collection_replaces">コレクションパッケージをインポートすると、もう一方のアプリの内容がすべて置き換わります。そのアプリが AnkiWeb と同期している場合、次の同期は一方向のアップロードとなり、AnkiWeb 上の内容が置き換わります。</string>
     <string name="export_deck_merges">デッキパッケージをインポートすると、もう一方のアプリにある内容に統合されます。ほかの内容は置き換わらず、次の同期は通常どおり行われます。</string>
+    <!-- In-app updater -->
+    <string name="update_check_title">アップデートを確認</string>
+    <string name="update_check_auto">アップデートを自動で確認</string>
+    <string name="update_available_title">Hayaki %s が利用できます</string>
+    <string name="update_action">アップデート</string>
+    <string name="update_later">あとで</string>
+    <string name="update_downloading">アップデートをダウンロード中…</string>
+    <string name="update_up_to_date">最新バージョンです</string>
+    <string name="update_check_failed">アップデートを確認できませんでした</string>
+    <string name="update_verify_failed">ダウンロードしたファイルの検証に失敗しました</string>
+    <string name="update_download_failed">アップデートをダウンロードできませんでした</string>
+    <string name="update_allow_install">Hayaki にアプリのインストールを許可してから、もう一度「アップデート」をタップしてください</string>
 </resources>

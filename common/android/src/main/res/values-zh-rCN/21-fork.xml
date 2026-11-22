@@ -37,4 +37,16 @@
     <string name="deck_list_deck_actions">牌组操作</string>
     <string name="export_collection_replaces">导入集合包会替换另一个应用中的全部内容。如果那个应用与 AnkiWeb 同步，它的下一次同步将是单向上传，会替换 AnkiWeb 上的内容。</string>
     <string name="export_deck_merges">导入牌组包会合并到另一个应用中已有的内容里。那里的其他内容不会被替换，下一次同步照常进行。</string>
+    <!-- In-app updater -->
+    <string name="update_check_title">检查更新</string>
+    <string name="update_check_auto">自动检查更新</string>
+    <string name="update_available_title">Hayaki %s 可用</string>
+    <string name="update_action">更新</string>
+    <string name="update_later">稍后</string>
+    <string name="update_downloading">正在下载更新…</string>
+    <string name="update_up_to_date">已是最新版本</string>
+    <string name="update_check_failed">无法检查更新</string>
+    <string name="update_verify_failed">下载的文件校验失败</string>
+    <string name="update_download_failed">无法下载更新</string>
+    <string name="update_allow_install">请允许 Hayaki 安装应用，然后再次点按“更新”</string>
 </resources>

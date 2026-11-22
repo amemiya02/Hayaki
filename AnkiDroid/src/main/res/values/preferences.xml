@@ -24,6 +24,9 @@
     <string name="username_key">username</string>
     <string name="last_successful_sync_time_key">lastSuccessfulSyncTime</string>
     <string name="last_sync_time_key">lastSyncTime</string>
+    <!-- Updates -->
+    <string name="pref_update_check_key">updateCheckEnabled</string>
+    <string name="last_update_check_key">lastUpdateCheckMillis</string>
     <string name="current_sync_uri_key">currentSyncUri</string>
     <string name="sync_notifs_request_shown_key">SyncNotifsRequestShown</string>
     <!-- Backup -->

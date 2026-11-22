@@ -38,6 +38,7 @@ internal data class AboutScreenState(
     val backendVersion: String,
     val fsrsVersion: String?,
     val copyDebugInfoLabel: String,
+    val updateCheckEnabled: Boolean,
 )
 
 @Composable
@@ -50,6 +51,8 @@ internal fun AboutScreen(
     onSupportUpstream: () -> Unit,
     onChangelog: () -> Unit,
     onCopyDebugInfo: () -> Unit,
+    onCheckForUpdates: () -> Unit,
+    onUpdateCheckEnabledChange: (Boolean) -> Unit,
 ) {
     val foundation = MaterialTheme.foundation
     val name = stringResource(CommonString.fork_name)
@@ -109,6 +112,24 @@ internal fun AboutScreen(
                     modifier = modifier,
                     highlighted = highlighted,
                     onClick = onChangelog,
+                )
+            }
+            SettingsSearchTarget(searchTarget == "check_for_updates") { modifier, highlighted ->
+                SettingsRow(
+                    stringResource(CommonString.update_check_title),
+                    icon = R.drawable.symbol_download,
+                    modifier = modifier,
+                    highlighted = highlighted,
+                    onClick = onCheckForUpdates,
+                )
+            }
+            SettingsSearchTarget(searchTarget == "auto_check_for_updates") { modifier, highlighted ->
+                SettingsSwitchRow(
+                    stringResource(CommonString.update_check_auto),
+                    checked = state.updateCheckEnabled,
+                    onChange = onUpdateCheckEnabledChange,
+                    modifier = modifier,
+                    highlighted = highlighted,
                 )
             }
             SettingsSearchTarget(searchTarget == "copy_debug_info") { modifier, highlighted ->
