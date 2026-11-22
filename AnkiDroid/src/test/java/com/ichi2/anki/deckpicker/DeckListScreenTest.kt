@@ -2,20 +2,20 @@
 
 package com.ichi2.anki.deckpicker
 
-import android.provider.Settings
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.SemanticsActions
-import androidx.compose.ui.semantics.SemanticsProperties
-import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
+import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasScrollToIndexAction
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.longClick
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -24,25 +24,19 @@ import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.Density
-import androidx.core.content.edit
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import anki.decks.DeckTreeNode
 import anki.decks.deckTreeNode
-import com.ichi2.anki.CollectionManager.TR
-import com.ichi2.anki.R
 import com.ichi2.anki.RobolectricTest
-import com.ichi2.anki.common.android.Animations
 import com.ichi2.anki.libanki.DeckId
 import com.ichi2.anki.libanki.sched.Counts
 import com.ichi2.anki.libanki.sched.DeckNode
-import com.ichi2.anki.settings.Prefs
 import com.ichi2.compose.theme.AnkiDroidTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
-import kotlin.math.abs
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -127,50 +121,12 @@ class DeckListScreenTest : RobolectricTest() {
     ) = DeckListScreenState(decks = decks(), isEmptyCollection = false, queuesToday = Counts(new = dueToday), studiedToday = studiedToday)
 
     @Test
-    fun `Today reaches its new progress without animating in safe display mode`() {
-        Prefs.sharedPrefs.edit { putBoolean(Prefs.key(R.string.safe_display_key), true) }
-        assertProgressAppearsImmediately()
-    }
-
-    @Test
-    fun `Today reaches its new progress without animating when the system disables animations`() {
-        Settings.Global.putFloat(targetContext.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 0f)
-        assertProgressAppearsImmediately()
-    }
-
-    private fun assertProgressAppearsImmediately() {
-        addDeck("Spanish")
-        val deckListState = mutableStateOf(stateWithDecks(dueToday = 10))
-        composeRule.setContent {
-            AnkiDroidTheme {
-                DeckListScreen(state = deckListState.value, actions = actions)
-            }
-        }
-        val indicator =
-            composeRule.onNode(SemanticsMatcher.keyIsDefined(SemanticsProperties.ProgressBarRangeInfo), useUnmergedTree = true)
-        assertEquals(0f, indicator.fetchSemanticsNode().config[SemanticsProperties.ProgressBarRangeInfo].current)
-
-        composeRule.mainClock.autoAdvance = false
-        assertFalse(Animations.areAnimationsEnabled(targetContext))
-        composeRule.runOnUiThread {
-            deckListState.value = deckListState.value.copy(queuesToday = Counts(new = 2), studiedToday = 8)
-            Snapshot.sendApplyNotifications()
-        }
-        composeRule.mainClock.advanceTimeBy(32)
-
-        assertEquals(0.8f, indicator.fetchSemanticsNode().config[SemanticsProperties.ProgressBarRangeInfo].current)
-    }
-
-    @Test
     fun `a Deck shows only nonzero counts and names the counts action for a screen reader`() {
         val spanish = addDeck("Spanish")
         repeat(3) { addBasicNote("front $it").firstCard().let { card -> col.setDeck(listOf(card.id), spanish) } }
         show(stateWithDecks())
 
         composeRule.onNodeWithText("Spanish").assertIsDisplayed()
-        composeRule.onNodeWithText("New").assertIsDisplayed()
-        composeRule.onNodeWithText("Learning").assertIsDisplayed()
-        composeRule.onNodeWithText("Due").assertIsDisplayed()
         val counts = composeRule.onNodeWithContentDescription("New: 3").assertIsDisplayed()
         composeRule.onNodeWithContentDescription("Learning: 0", useUnmergedTree = true).assertDoesNotExist()
         composeRule.onNodeWithContentDescription("Due: 0", useUnmergedTree = true).assertDoesNotExist()
@@ -186,7 +142,7 @@ class DeckListScreenTest : RobolectricTest() {
 
         assertTextFits(name)
         assertCountsBeside(name, "4966")
-        assertCountsFitUnderHeadings()
+        assertCountsFit()
     }
 
     @Test
@@ -198,7 +154,7 @@ class DeckListScreenTest : RobolectricTest() {
 
         assertTextFits(name)
         assertCountsBeside(name, "4966")
-        assertCountsFitUnderHeadings()
+        assertCountsFit()
     }
 
     @Test
@@ -210,7 +166,7 @@ class DeckListScreenTest : RobolectricTest() {
         composeRule.onNode(hasScrollToIndexAction()).performScrollToNode(hasText(name))
 
         assertTextFits(name)
-        assertCountsFitUnderHeadings()
+        assertCountsFit()
     }
 
     @Test
@@ -232,14 +188,18 @@ class DeckListScreenTest : RobolectricTest() {
         assertTextFits("1-高频")
     }
 
+    /** A Deck row's [count], not the same number among today's totals in the summary */
+    private fun deckCount(count: String) =
+        composeRule.onNode(hasText(count) and !hasAnyAncestor(hasTestTag(TODAY_COUNTS_TAG)), useUnmergedTree = true)
+
     /** The [count] shares a line with the Deck name: the counts did not drop under it */
     private fun assertCountsBeside(
         name: String,
         count: String,
     ) {
-        composeRule.onNodeWithText(count, useUnmergedTree = true).performScrollTo()
+        deckCount(count).performScrollTo()
         val nameBounds = composeRule.onNodeWithText(name, useUnmergedTree = true).getUnclippedBoundsInRoot()
-        val countBounds = composeRule.onNodeWithText(count, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val countBounds = deckCount(count).getUnclippedBoundsInRoot()
         assertTrue(
             countBounds.top < nameBounds.bottom && countBounds.bottom > nameBounds.top,
             "The counts of '$name' ($countBounds) are not beside its name ($nameBounds)",
@@ -277,17 +237,11 @@ class DeckListScreenTest : RobolectricTest() {
         return DeckListScreenState(decks = deckList, isEmptyCollection = false, queuesToday = Counts(30, 41, 4966), studiedToday = 0)
     }
 
-    private fun assertCountsFitUnderHeadings() {
-        fun centerX(text: String): Float {
-            val bounds = composeRule.onNodeWithText(text, useUnmergedTree = true).getUnclippedBoundsInRoot()
-            return (bounds.left.value + bounds.right.value) / 2
-        }
-
+    private fun assertCountsFit() {
         val counts = listOf("30", "41", "4966")
-        val headings = listOf(TR.actionsNew(), TR.schedulingLearning(), TR.decksReviewHeader())
-        composeRule.onNodeWithText(counts.last(), useUnmergedTree = true).performScrollTo().assertIsDisplayed()
-        counts.zip(headings).forEach { (count, heading) ->
-            val layout = textLayout(count)
+        deckCount(counts.last()).performScrollTo().assertIsDisplayed()
+        counts.forEach { count ->
+            val layout = textLayout(deckCount(count))
             assertEquals(1, layout.lineCount, "Count '$count' must fit on one line within ${layout.size}")
             assertFalse(layout.isLineEllipsized(0), "Count '$count' ends in an ellipsis")
             assertEquals(count.length, layout.getLineEnd(0, visibleEnd = true))
@@ -299,7 +253,6 @@ class DeckListScreenTest : RobolectricTest() {
                     "Digit $digit of '$count' falls outside the text layout: $glyph within ${layout.size}",
                 )
             }
-            assertTrue(abs(centerX(heading) - centerX(count)) <= 1f, "The $count count is not centered under its heading")
         }
     }
 
@@ -312,8 +265,9 @@ class DeckListScreenTest : RobolectricTest() {
         assertEquals(text.length, layout.getLineEnd(finalLine, visibleEnd = true))
     }
 
-    private fun textLayout(text: String): TextLayoutResult {
-        val node = composeRule.onNodeWithText(text, useUnmergedTree = true)
+    private fun textLayout(text: String): TextLayoutResult = textLayout(composeRule.onNodeWithText(text, useUnmergedTree = true))
+
+    private fun textLayout(node: SemanticsNodeInteraction): TextLayoutResult {
         val layouts = mutableListOf<TextLayoutResult>()
         checkNotNull(node.fetchSemanticsNode().config[SemanticsActions.GetTextLayoutResult].action)(layouts)
         return layouts.single()
@@ -334,6 +288,18 @@ class DeckListScreenTest : RobolectricTest() {
 
         composeRule.onNodeWithText("58 cards to study today").assertIsDisplayed()
         composeRule.onNodeWithText("9 studied so far").assertIsDisplayed()
+    }
+
+    @Test
+    fun `today's totals sit in the summary and no headings strip runs over the Decks`() {
+        addDeck("Spanish")
+        show(DeckListScreenState(decks = decks(), isEmptyCollection = false, queuesToday = Counts(60, 58, 5880), studiedToday = 9))
+
+        composeRule.onNodeWithContentDescription("New: 60, Learning: 58, Due: 5880").assertIsDisplayed()
+        // The only "New" and "Due" labels are the summary's: no headings strip over the count columns
+        composeRule.onAllNodes(hasText("New") and hasAnyAncestor(hasTestTag(TODAY_COUNTS_TAG)), useUnmergedTree = true).assertCountEquals(1)
+        composeRule.onAllNodesWithText("New", useUnmergedTree = true).assertCountEquals(1)
+        composeRule.onAllNodesWithText("Due", useUnmergedTree = true).assertCountEquals(1)
     }
 
     @Test
