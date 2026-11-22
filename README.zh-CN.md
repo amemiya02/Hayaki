@@ -48,6 +48,6 @@ cd Hayaki
 
 ## 项目与许可
 
-Hayaki 独立维护。安卓版基于 AnkiDroid 和 Anki 引擎，界面使用 Kotlin、Jetpack Compose 和 Material 3。Android 和 iOS 共用图标、主题和对外版本号。[AnkiDroid](https://github.com/ankidroid/Anki-Android) · [Anki](https://github.com/ankitects/anki) · [双端维护约定](docs/adr/0007-shared-hayaki-product.md)
+Hayaki 独立维护。安卓版基于 AnkiDroid 和 Anki 引擎，界面使用 Kotlin、Jetpack Compose 和 Material 3。Android 和 iOS 共用图标和主题，版本号各自独立。[AnkiDroid](https://github.com/ankidroid/Anki-Android) · [Anki](https://github.com/ankitects/anki) · [双端维护约定](docs/adr/0007-shared-hayaki-product.md)
 
 安卓应用采用 GPL-3.0-or-later 许可。引擎组件、公共 API 和内置资源各自遵循相应的许可证。[许可证](COPYING) · [许可声明](LICENSES/)

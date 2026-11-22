@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       release_artifacts_only:
-        description: "Package the signed Play release APKs for upgrade and joint release verification."
+        description: "Package the signed Play release APKs for release verification."
         type: boolean
         default: false
       release_device_only:

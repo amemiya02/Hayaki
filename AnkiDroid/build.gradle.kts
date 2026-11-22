@@ -122,7 +122,7 @@ android {
         buildConfigField("Boolean", "SHOW_DONATE_LINKS", "true")
         resValue("string", "app_name", ForkIdentity.NAME)
 
-        // Hayaki's public version is shared with iOS. Android keeps the inherited
+        // Android's public version is its own, independent of iOS. versionCode keeps the inherited
         // monotonic build sequence and the release-type hundreds digit (3 = public).
         // Per-ABI prefixes are applied to this base below.
         versionCode = 22600301
