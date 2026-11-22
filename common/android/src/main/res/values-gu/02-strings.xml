@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">નામ બદલો</string>
     <string name="checks_action" maxLength="28">તપાસ</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">ડેક કાઢી રહ્યું છે&#8230;</string>
-    <string name="info_rate">AnkiDroid ને રેટ કરો</string>
     <string name="import_title">આયાત કરી રહ્યું છે</string>
     <string name="import_preparing_file">આયાત માટે ફાઇલ તૈયાર કરી રહ્યાં છીએ&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">ઉમેરો</string>

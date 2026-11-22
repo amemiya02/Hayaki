@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Nimeta ümber</string>
     <string name="checks_action" maxLength="28">Kontrolli</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Kustutan kaardipakki&#8230;</string>
-    <string name="info_rate">Hinda AnkiDroidi</string>
     <string name="import_title">Importimine</string>
     <string name="import_preparing_file">Faili ettevalmistamine importimiseks&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Lisa</string>

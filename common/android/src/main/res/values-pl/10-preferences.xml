@@ -224,7 +224,6 @@
     <string name="type_in_answer_focus" maxLength="41">Zaznacz pole „podaj odpowiedź”</string>
     <string name="type_in_answer_focus_summ">Automatycznie zaznaczaj pole „podaj odpowiedź” w przeglądarce</string>
     <!-- About -->
-    <string name="open_changelog">Otwórz listę zmian w programie</string>
     <string name="pref_cat_about_title" maxLength="41">O programie</string>
     <string name="license">Licencja</string>
     <string name="license_description"><![CDATA[Hayaki jest wydawany na licencji <a href=\"%1$s\">GPL-3.0</a> i <a href=\"%2$s\">AGPL-3.0</a> z kodem źródłowym dostępnym <a href=\"%3$s\">na GitHubie</a>]]></string>

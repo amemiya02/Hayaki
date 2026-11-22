@@ -17,8 +17,6 @@ import com.ichi2.anki.BuildConfig
 import com.ichi2.anki.CollectionManager.TR
 import com.ichi2.anki.CommonString
 import com.ichi2.anki.R
-import com.ichi2.anki.common.destinations.ChangelogDestination
-import com.ichi2.anki.common.destinations.navigate
 import com.ichi2.anki.common.utils.android.showThemedToast
 import com.ichi2.anki.dialogs.help.HelpDialog
 import com.ichi2.anki.launchCatchingTask
@@ -43,12 +41,13 @@ import net.ankiweb.rsdroid.BuildConfig as BackendBuildConfig
 
 class AboutFragment : Fragment() {
     private var developerClicks by mutableStateOf(0)
-    private var updateCheckEnabled by mutableStateOf(Prefs.isUpdateCheckEnabled)
+    private var updateCheckEnabled by mutableStateOf(false)
     private val updateViewModel: UpdateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         developerClicks = savedInstanceState?.getInt(STATE_DEVELOPER_CLICKS) ?: 0
+        updateCheckEnabled = Prefs.isUpdateCheckEnabled
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -88,7 +87,6 @@ class AboutFragment : Fragment() {
                     val canRate = IntentUtil.canOpenIntent(requireContext(), AnkiDroidApp.getMarketIntent(requireContext()))
                     showDialogFragment(HelpDialog.newSupportInstance(canRate))
                 },
-                onChangelog = { navigate(ChangelogDestination) },
                 onCopyDebugInfo = ::copyDebugInfo,
                 onCheckForUpdates = updateViewModel::checkNow,
                 onUpdateCheckEnabledChange = {

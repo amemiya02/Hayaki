@@ -104,7 +104,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">重命名</string>
     <string name="checks_action" maxLength="28">检查</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">删除牌组\n请稍等&#8230;&#8230;</string>
-    <string name="info_rate">给 AnkiDroid 评分</string>
     <string name="import_title">正在导入&#8230;</string>
     <string name="import_preparing_file">准备导入文件&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">添加</string>

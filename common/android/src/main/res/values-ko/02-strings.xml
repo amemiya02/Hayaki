@@ -104,7 +104,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">이름 바꾸기</string>
     <string name="checks_action" maxLength="28">확인</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">카드 묶음 삭제 중&#8230;\n 잠시만 기다리세요.</string>
-    <string name="info_rate">AnkiDroid 평가하기</string>
     <string name="import_title">가져오는 중</string>
     <string name="import_preparing_file">불러올 파일 준비 중&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">추가</string>

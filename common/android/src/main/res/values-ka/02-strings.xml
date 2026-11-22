@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">გადარქმევა</string>
     <string name="checks_action" maxLength="28">შემოწმება</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">იშლება დასტა&#8230;</string>
-    <string name="info_rate">შეაფასეთ AnkiDroid</string>
     <string name="import_title">იმპორტირება</string>
     <string name="import_preparing_file">ფაილის მომზადება იმპორტისთვის&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">დამატება</string>

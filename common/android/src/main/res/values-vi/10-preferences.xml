@@ -213,7 +213,6 @@
     <string name="type_in_answer_focus" maxLength="41">Tập trung \'Nhập câu trả lời\'</string>
     <string name="type_in_answer_focus_summ">Tự động đặt con trỏ vào trường ‘nhập câu trả lời’ trong màn hình học tập</string>
     <!-- About -->
-    <string name="open_changelog">Mở nhật ký thay đổi</string>
     <string name="pref_cat_about_title" maxLength="41">Giới thiệu</string>
     <string name="license">Giấy phép</string>
     <string name="license_description"><![CDATA[Hayaki được phát hành theo giấy phép <a href=\"%1$s\">GPL-3.0</a> và <a href=\"%2$s\">AGPL-3.0</a>, với mã nguồn có sẵn <a href=\"%3$s\">trên GitHub</a>]]></string>

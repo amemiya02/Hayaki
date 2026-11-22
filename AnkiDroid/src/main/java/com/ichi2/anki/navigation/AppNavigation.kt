@@ -37,8 +37,6 @@ import com.ichi2.anki.CardTemplateEditor
 import com.ichi2.anki.CardTemplateEditorFragment
 import com.ichi2.anki.DeckPicker
 import com.ichi2.anki.DrawingFragment
-import com.ichi2.anki.Info
-import com.ichi2.anki.InfoFragment
 import com.ichi2.anki.MoreFragment
 import com.ichi2.anki.NoteEditorActivity
 import com.ichi2.anki.NoteEditorPaneFragment
@@ -333,7 +331,6 @@ internal class AppNavigation(
                 AllPermissionsExplanationActivity::class.java.name to AllPermissionsExplanationFragment::class.java,
                 PermissionsActivity::class.java.name to CollectionPermissionsFragment::class.java,
                 ManageSpaceActivity::class.java.name to ManageSpaceFragment::class.java,
-                Info::class.java.name to InfoFragment::class.java,
                 SharedDecksActivity::class.java.name to SharedDecksFragment::class.java,
                 StudyOptionsActivity::class.java.name to StudyOptionsFlowFragment::class.java,
                 MultimediaActivity::class.java.name to MultimediaFlowFragment::class.java,

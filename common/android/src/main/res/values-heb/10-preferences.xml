@@ -219,7 +219,6 @@
     <string name="type_in_answer_focus" maxLength="41">התמקד ב\'הקלד תשובה\'</string>
     <string name="type_in_answer_focus_summ">מיקוד אוטומטי של שדה \'הקלד תשובה\' במסך הלימוד</string>
     <!-- About -->
-    <string name="open_changelog">פתח את יומן רישום השינויים</string>
     <string name="pref_cat_about_title" maxLength="41">אודות</string>
     <string name="license">רישיון</string>
     <string name="license_description"><![CDATA[Hayaki משוחרר תחת הרישיונות <a href=\"%1$s\">GPL-3.0</a> ו-<a href=\"%2$s\">AGPL-3.0</a>, עם קוד המקור זמין <a href=\"%3$s\">ב-GitHub</a>]]></string>

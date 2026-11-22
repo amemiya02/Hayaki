@@ -104,7 +104,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">名前を変更</string>
     <string name="checks_action" maxLength="28">検査</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">デッキを削除しています&#8230;</string>
-    <string name="info_rate">AnkiDroidを評価</string>
     <string name="import_title">インポート</string>
     <string name="import_preparing_file">インポートするファイルを準備しています&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">追加</string>

@@ -134,8 +134,6 @@ class AllActivitiesScreenshotTest : ScreenshotTest() {
                     StudyOptionsActivity::class.java,
                     // ManageSpaceScreenshotTest
                     ManageSpaceActivity::class.java,
-                    // InfoScreenshotTest
-                    Info::class.java,
                     // NoteEditorScreenshotTest
                     NoteEditorActivity::class.java,
                 )

@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">𐌽𐌹𐌿𐌾𐌰𐍄𐌰 𐌽𐌰𐌼𐍉 𐌲𐌹𐌱𐌰𐌽</string>
     <string name="checks_action" maxLength="28">𐌿𐍃𐍃𐍉𐌺𐌾𐌰𐌽</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">𐍅𐌹𐌺𐍉 𐌿𐍃𐌽𐌹𐌼𐌰𐌳𐌰&#8230;</string>
-    <string name="info_rate">𐍅𐌰𐌹𐍂𐌸 𐌳𐌿 𐌰𐌽𐌺𐌴𐌹𐌳𐍂𐌰𐌿𐌳 𐌲𐌹𐌱𐌰𐌽</string>
     <string name="import_title">𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌳𐌰</string>
     <string name="import_preparing_file">𐌼𐌰𐌽𐍅𐌾𐌰𐌳𐌰 𐍆𐌰𐌾𐌻 𐌳𐌿 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌽&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">𐌱𐌹𐌰𐌿𐌺𐌰𐌽</string>

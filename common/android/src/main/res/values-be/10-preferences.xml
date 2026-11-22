@@ -224,7 +224,6 @@
     <string name="type_in_answer_focus" maxLength="41">Пераключацца на поле «Увесці адказ»</string>
     <string name="type_in_answer_focus_summ">Аўтаматычна пераключацца на поле «Увесці адказ» у экране навучання</string>
     <!-- About -->
-    <string name="open_changelog">Адкрыць спіс змен</string>
     <string name="pref_cat_about_title" maxLength="41">Аб праграме</string>
     <string name="license">Ліцэнзія</string>
     <string name="license_description"><![CDATA[Hayaki выпушчаны на ўмовах ліцэнзій <a href=\"%1$s\">GPL-3.0</a> і <a href=\"%2$s\">AGPL-3.0</a>, а таксама зыходным кодам, які даступны <a href=\"%3$s\">на GitHub</a>]]></string>

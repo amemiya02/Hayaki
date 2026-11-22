@@ -218,7 +218,6 @@
     <string name="type_in_answer_focus" maxLength="41">Resaltar \"escribe a resposta\"</string>
     <string name="type_in_answer_focus_summ">Resaltar automaticamente o campo «escribe a resposta» na pantalla de estudo.</string>
     <!-- About -->
-    <string name="open_changelog">Abrir historial de cambios</string>
     <string name="pref_cat_about_title" maxLength="41">Sobre</string>
     <string name="license">Licenza</string>
     <string name="license_description"><![CDATA[Hayaki publícase baixo as licenzas <a href=\"%1$s\">GPL-3.0</a> e <a href=\"%2$s\">AGPL-3.0</a>, co código fonte dispoñíbel <a href=\"%3$s\">no GitHub</a>]]></string>

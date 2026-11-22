@@ -160,8 +160,6 @@ class AppNameInStringsTest {
                 "help_item_support_other_ankidroid",
                 "donate_description",
                 "user_is_a_robot",
-                // opens the Official App's store page
-                "info_rate",
                 // another app using the same folder is most likely the Official App
                 "database_locked_summary_new",
                 // Upstream's APIs, which the Fork implements under their own names

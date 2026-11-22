@@ -229,7 +229,6 @@
     <string name="type_in_answer_focus" maxLength="41">التركيز على «أدخل الإجابة»</string>
     <string name="type_in_answer_focus_summ">ركز على حقل «أدخل الإجابة» في شاشة الدراسة تلقائيًا</string>
     <!-- About -->
-    <string name="open_changelog">فتح سجل التغييرات</string>
     <string name="pref_cat_about_title" maxLength="41">حول</string>
     <string name="license">الرخصة</string>
     <string name="license_description"><![CDATA[Hayaki مرخص تحت رخصتي <a href=\"%1$s\">GPL-3.0</a> و<a href=\"%2$s\">AGPL-3.0</a>، وتتوفر الشفرة المصدرية على <a href=\"%3$s\">GitHub</a>]]></string>

@@ -215,7 +215,6 @@
     <string name="type_in_answer_focus" maxLength="41">文字入力欄にフォーカス</string>
     <string name="type_in_answer_focus_summ">答えをキーボード入力するタイプのカードを学習画面に表示したときに、あらかじめ文字入力欄を選択してキーボードを表示した状態にします</string>
     <!-- About -->
-    <string name="open_changelog">変更履歴を開く</string>
     <string name="pref_cat_about_title" maxLength="41">Hayakiについて</string>
     <string name="license">ライセンス</string>
     <string name="license_description"><![CDATA[<a href="%1$s">GPL-3.0</a> · <a href="%2$s">AGPL-3.0</a> · <a href="%3$s">ソースコード</a>]]></string>

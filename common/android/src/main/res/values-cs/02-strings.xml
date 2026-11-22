@@ -107,7 +107,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Přejmenovat</string>
     <string name="checks_action" maxLength="28">Zkontrolovat</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Odstraňuje se balíček&#8230;</string>
-    <string name="info_rate">Ohodnotit AnkiDroid</string>
     <string name="import_title">Importuje se</string>
     <string name="import_preparing_file">Soubor se připravuje na import&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Přidat</string>

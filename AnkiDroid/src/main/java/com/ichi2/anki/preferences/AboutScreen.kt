@@ -28,6 +28,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.core.text.parseAsHtml
 import com.ichi2.anki.CommonString
 import com.ichi2.anki.R
+import com.ichi2.anki.ui.internationalization.trCase
 import com.ichi2.compose.theme.foundation
 import com.ichi2.compose.ui.dialogs.ConfirmationDialog
 import com.ichi2.compose.ui.dialogs.DialogAction
@@ -49,7 +50,6 @@ internal fun AboutScreen(
     onLogo: () -> Unit,
     onLink: (String) -> Unit,
     onSupportUpstream: () -> Unit,
-    onChangelog: () -> Unit,
     onCopyDebugInfo: () -> Unit,
     onCheckForUpdates: () -> Unit,
     onUpdateCheckEnabledChange: (Boolean) -> Unit,
@@ -105,18 +105,9 @@ internal fun AboutScreen(
         )
         Column(Modifier.padding(top = 18.dp)) {
             SettingsDivider()
-            SettingsSearchTarget(searchTarget == "open_changelog") { modifier, highlighted ->
-                SettingsRow(
-                    stringResource(CommonString.open_changelog),
-                    icon = R.drawable.symbol_history,
-                    modifier = modifier,
-                    highlighted = highlighted,
-                    onClick = onChangelog,
-                )
-            }
             SettingsSearchTarget(searchTarget == "check_for_updates") { modifier, highlighted ->
                 SettingsRow(
-                    stringResource(CommonString.update_check_title),
+                    trCase().checkForUpdates(),
                     icon = R.drawable.symbol_download,
                     modifier = modifier,
                     highlighted = highlighted,

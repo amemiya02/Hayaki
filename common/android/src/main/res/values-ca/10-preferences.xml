@@ -218,7 +218,6 @@
     <string name="type_in_answer_focus" maxLength="41">Enfoca \'escriu resposta\'</string>
     <string name="type_in_answer_focus_summ">Automatically focus the ‘type in answer’ field in the study screen</string>
     <!-- About -->
-    <string name="open_changelog">Obre el registre de canvis</string>
     <string name="pref_cat_about_title" maxLength="41">Quant a</string>
     <string name="license">Llicència</string>
     <string name="license_description"><![CDATA[Hayaki es publica sota les llicències <a href=\"%1$s\">GPL-3.0</a> i <a href=\"%2$s\">AGPL-3.0</a>, i el codi font està disponible <a href=\"%3$s\">a GitHub</a>]]></string>

@@ -218,7 +218,6 @@
     <string name="type_in_answer_focus" maxLength="41">(جاۋاب كىرگۈزۈش) كە مەركەزلىشىدۇ</string>
     <string name="type_in_answer_focus_summ">ئۆگىنىش ئېكرانىدا ئۆزلۈكىدىن (جاۋاب كىرگۈزۈش) بۆلىكىگە مەركەزلىشىدۇ</string>
     <!-- About -->
-    <string name="open_changelog">ئۆزگىرىش خاتىرىسىنى ئاچىدۇ</string>
     <string name="pref_cat_about_title" maxLength="41">ھەققىدە</string>
     <string name="license">ئىجازەتنامە</string>
     <string name="license_description"><![CDATA[مەزكۇر Hayaki نى <a href=\"%1$s\">GPL-3.0</a> ۋە <a href=\"%2$s\">AGPL-3.0</a> ئىجازىتىدە تارقىتىدۇ، ئەسلى مەنبە كودى <a href=\"%3$s\">GitHub</a> تا بار]]></string>

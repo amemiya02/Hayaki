@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Canvia el nom</string>
     <string name="checks_action" maxLength="28">Comprova</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">S\'està suprimint el paquet&#8230;\nUn moment si us plau.</string>
-    <string name="info_rate">Valoreu l\'AnkiDroid</string>
     <string name="import_title">S\'està important</string>
     <string name="import_preparing_file">Preparing file for import&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Afegeix</string>

@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Nimeä uudelleen</string>
     <string name="checks_action" maxLength="28">Tarkista</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Poistetaan pakka&#8230;</string>
-    <string name="info_rate">Arvostele AnkiDroid</string>
     <string name="import_title">Tuodaan</string>
     <string name="import_preparing_file">Valmistellaan tiedostoa tuontiin&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Lisää</string>

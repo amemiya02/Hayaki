@@ -218,7 +218,6 @@
     <string name="type_in_answer_focus" maxLength="41">Focus ‘type in answer’</string>
     <string name="type_in_answer_focus_summ">Automatically focus the ‘type in answer’ field in the study screen</string>
     <!-- About -->
-    <string name="open_changelog">𐌻𐌰𐌿𐌲 𐌹𐌽𐌼𐌰𐌹𐌳𐌴𐌹𐌽𐍉 𐌿𐍃𐌻𐌿𐌺𐌰𐌽</string>
     <string name="pref_cat_about_title" maxLength="41">𐌱𐌹</string>
     <string name="license">𐌰𐌽𐌳𐌻𐌴𐍄</string>
     <string name="license_description"><![CDATA[Hayaki 𐌿𐍃𐌼𐌴𐍂𐌹𐌸 𐌹𐍃𐍄 𐌿𐍆 <a href=\"%1$s\">GPL-3.0</a> 𐌾𐌰𐌷 <a href=\"%2$s\">AGPL-3.0</a> 𐌰𐌽𐌳𐌻𐌴𐍄𐌰𐌼, 𐌼𐌹𐌸 𐌺𐍉𐌳𐌰𐌿 𐌱𐍂𐌿𐌽𐌽𐌹𐌽𐍃 𐍅𐌹𐍃𐌰𐌽𐌳𐌹𐌽 <a href=\"%3$s\">𐌰𐍄 𐌲𐌹𐍄𐌷𐌰𐌱</a>]]></string>

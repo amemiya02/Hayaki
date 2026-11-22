@@ -130,7 +130,6 @@ import com.ichi2.anki.common.android.AdaptionUtil
 import com.ichi2.anki.common.android.appContext
 import com.ichi2.anki.common.annotations.NeedsTest
 import com.ichi2.anki.common.crashreporting.CrashReportService
-import com.ichi2.anki.common.destinations.ChangelogDestination
 import com.ichi2.anki.common.destinations.DeferredNavigation
 import com.ichi2.anki.common.destinations.PreferencesDestination
 import com.ichi2.anki.common.destinations.ReviewDeckDestination
@@ -474,14 +473,6 @@ open class DeckPicker :
             ActivityResultContracts.StartActivityForResult(),
             DeckPickerActivityResultCallback {
                 processReviewResults(it)
-            },
-        )
-
-    private val showNewVersionInfoLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(),
-            DeckPickerActivityResultCallback {
-                showStartupScreensAndDialogs(baseContext.sharedPrefs(), 3)
             },
         )
 
@@ -2196,19 +2187,11 @@ open class DeckPicker :
                 return
             }
 
-            // If no changes are required we go to the new features activity
-            // There the "lastVersion" is set, so that this code is not reached again
-            if (VersionUtils.isReleaseVersion) {
-                Timber.i("Displaying new features")
-                showNewVersionInfoLauncher.navigate(ChangelogDestination)
-            } else {
-                Timber.i("Dev Build - not showing 'new features'")
-                // Don't show new features dialog for development builds
-                InitialActivity.setUpgradedToLatestVersion(preferences)
-                val ver = resources.getString(CommonString.updated_version, VersionUtils.pkgVersionName)
-                postSnackbar(ver, Snackbar.LENGTH_SHORT)
-                showStartupScreensAndDialogs(preferences, 2)
-            }
+            // Hayaki has no changelog screen: record the version so this code is not reached again
+            InitialActivity.setUpgradedToLatestVersion(preferences)
+            val ver = resources.getString(CommonString.updated_version, VersionUtils.pkgVersionName)
+            postSnackbar(ver, Snackbar.LENGTH_SHORT)
+            showStartupScreensAndDialogs(preferences, 2)
         } else {
             // This is the main call when there is nothing special required
             Timber.i("No startup screens required")

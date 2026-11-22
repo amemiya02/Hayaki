@@ -217,7 +217,6 @@
     <string name="type_in_answer_focus" maxLength="41">‘Javobni kiritiş’ maydoniga ötiş</string>
     <string name="type_in_answer_focus_summ">Örganiş ekranida ‘javobni kiritiş’ maydoniga avtomatik tarzda ötiş</string>
     <!-- About -->
-    <string name="open_changelog">Özgarişlar röyxatini oçiş</string>
     <string name="pref_cat_about_title" maxLength="41">Hayaki haqida</string>
     <string name="license">Litsenziya</string>
     <string name="license_description"><![CDATA[Hayaki <a href=\"%1$s\">GPL-3.0</a> va <a href=\"%2$s\">AGPL-3.0</a> litsenziyalari ostida çiqarilgan, dastur kodi <a href=\"%3$s\">GitHubda</a> mavjud]]></string>

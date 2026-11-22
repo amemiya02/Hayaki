@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Renomi</string>
     <string name="checks_action" maxLength="28">Kontroli</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Forigado de kartaro&#8230;</string>
-    <string name="info_rate">Taksi AnkiDroid</string>
     <string name="import_title">Enporti</string>
     <string name="import_preparing_file">Preparado de dosiero por enporti&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Aldoni</string>

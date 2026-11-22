@@ -220,7 +220,6 @@
     <string name="type_in_answer_focus" maxLength="41">Pārslēgties uz \"Ierakstīt atbildi\"</string>
     <string name="type_in_answer_focus_summ">Apgūšanas ekrānā automātiski pārslēgties uz lauku \"Ievadīt atbildi\"</string>
     <!-- About -->
-    <string name="open_changelog">Atvērt izmaiņu žurnālu</string>
     <string name="pref_cat_about_title" maxLength="41">Par</string>
     <string name="license">Licence</string>
     <string name="license_description"><![CDATA[Hayaki ir laista klajā ar <a href=\"%1$s\">GPL-3.0</a> un <a href=\"%2$s\">AGPL-3.0</a> licencēm, un pirmkods ir pieejams <a href=\"%3$s\">GitHub</a>]]></string>

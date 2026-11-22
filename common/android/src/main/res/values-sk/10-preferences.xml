@@ -224,7 +224,6 @@
     <string name="type_in_answer_focus" maxLength="41">Vybrať „napíšte odpoveď“</string>
     <string name="type_in_answer_focus_summ">Automaticky vyberie pole „napíšte odpoveď“ na obrazovke študovania.</string>
     <!-- About -->
-    <string name="open_changelog">Otvoriť prehľad zmien</string>
     <string name="pref_cat_about_title" maxLength="41">O nás</string>
     <string name="license">Licencia</string>
     <string name="license_description"><![CDATA[Hayaki je vydaný pod licenciami <a href=\"%1$s\">GPL-3.0</a> a <a href=\"%2$s\">AGPL-3.0</a>, so zdrojovým kódom dostupným <a href=\"%3$s\">na GitHube</a>]]></string>

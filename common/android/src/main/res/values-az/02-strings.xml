@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Yenidən adlandır</string>
     <string name="checks_action" maxLength="28">Yoxla</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Dəstə silinir&#8230;</string>
-    <string name="info_rate">AnkiDroid\'ə xal ver</string>
     <string name="import_title">İxrac edilir</string>
     <string name="import_preparing_file">Fayl ixrac üçün hazırlanır&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Əlavə et</string>

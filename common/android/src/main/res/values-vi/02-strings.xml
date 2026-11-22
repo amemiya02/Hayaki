@@ -104,7 +104,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Đổi tên</string>
     <string name="checks_action" maxLength="28">Kiểm tra</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Đang xoá bộ thẻ&#8230;</string>
-    <string name="info_rate">Đánh giá AnkiDroid</string>
     <string name="import_title">Đang nhập</string>
     <string name="import_preparing_file">Đang chuẩn bị tệp tin để nhập vào&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Thêm</string>

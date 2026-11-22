@@ -215,7 +215,6 @@
     <string name="type_in_answer_focus" maxLength="41">定位答案输入框</string>
     <string name="type_in_answer_focus_summ">在学习时，光标自动跳转至输入框</string>
     <!-- About -->
-    <string name="open_changelog">打开更新日志</string>
     <string name="pref_cat_about_title" maxLength="41">关于</string>
     <string name="license">许可证</string>
     <string name="license_description"><![CDATA[<a href="%1$s">GPL-3.0</a> · <a href="%2$s">AGPL-3.0</a> · <a href="%3$s">源代码</a>]]></string>

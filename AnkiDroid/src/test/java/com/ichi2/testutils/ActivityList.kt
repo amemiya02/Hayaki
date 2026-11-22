@@ -15,7 +15,6 @@ import com.ichi2.anki.CardTemplateBrowserAppearanceEditor.Companion.EXTRA_QUESTI
 import com.ichi2.anki.CardTemplateEditor
 import com.ichi2.anki.DeckPicker
 import com.ichi2.anki.DrawingFragment
-import com.ichi2.anki.Info
 import com.ichi2.anki.IntentHandler
 import com.ichi2.anki.IntentHandler.Companion.getReviewDeckIntent
 import com.ichi2.anki.IntentHandler2
@@ -71,7 +70,6 @@ object ActivityList {
             get(NoteEditorActivity::class.java, normalIntent = { Intent().putExtras(NoteEditorFragment.addNoteArgs()) }),
             // Likely has unhandled intents
             get(PreferencesActivity::class.java, normalIntent = { PreferencesActivity.getIntent(targetContext) }),
-            get(Info::class.java),
             get(CardTemplateEditor::class.java, normalIntent = { note -> intentForCardTemplateEditor(note.noteTypeId) }) {
                 intentForCardTemplateEditor()
             },

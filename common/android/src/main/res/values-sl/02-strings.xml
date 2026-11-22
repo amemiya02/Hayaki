@@ -107,7 +107,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Preimenuj</string>
     <string name="checks_action" maxLength="28">Check</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Brisanje kompleta &#8230;</string>
-    <string name="info_rate">Oceni AnkiDroid</string>
     <string name="import_title">Uvažanje</string>
     <string name="import_preparing_file">Preparing file for import&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Dodaj</string>

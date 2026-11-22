@@ -107,7 +107,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Перейменувати</string>
     <string name="checks_action" maxLength="28">Перевірити</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Видалення колоди&#8230;\n Будь ласка, зачекайте.</string>
-    <string name="info_rate">Оцініть AnkiDroid</string>
     <string name="import_title">Імпортування</string>
     <string name="import_preparing_file">Файл готується для імпорту&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Додати</string>

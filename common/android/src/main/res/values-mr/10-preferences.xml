@@ -216,7 +216,6 @@
     <string name="type_in_answer_focus" maxLength="41">लक्ष द्या ‘उत्तर टाइप करा’</string>
     <string name="type_in_answer_focus_summ">Automatically focus the ‘type in answer’ field in the study screen</string>
     <!-- About -->
-    <string name="open_changelog">Open changelog</string>
     <string name="pref_cat_about_title" maxLength="41">बद्दल</string>
     <string name="license">परवाना</string>
     <string name="license_description"><![CDATA[Hayaki <a href=\"%1$s\">GPL-3.0</a> आणि <a href=\"%2$s\">AGPL-3.0</a> परवान्याखाली रिलीझ केले आहे. स्रोत कोड <a href=\"%3$s\">GitHub</a> वर उपलब्ध आहे]]></string>

@@ -215,7 +215,6 @@
     <string name="type_in_answer_focus" maxLength="41">聚焦“輸入答案”</string>
     <string name="type_in_answer_focus_summ">Automatically focus the ‘type in answer’ field in the study screen</string>
     <!-- About -->
-    <string name="open_changelog">打開更新日誌</string>
     <string name="pref_cat_about_title" maxLength="41">關於</string>
     <string name="license">許可證</string>
     <string name="license_description"><![CDATA[Hayaki 在<a href=\"%1$s\">GPL-3.0</a>和<a href=\"%2$s\">AGPL-3.0</a>許可證下發佈，原始程式碼位於<a href=\"%3$s\">Github上</a>]]></string>

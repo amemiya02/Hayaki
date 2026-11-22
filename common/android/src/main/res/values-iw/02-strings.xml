@@ -106,7 +106,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">שינוי שם</string>
     <string name="checks_action" maxLength="28">בדוק</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">מוחק חפיסה&#8230;</string>
-    <string name="info_rate">דירוג AnkiDroid</string>
     <string name="import_title">מתבצע ייבוא</string>
     <string name="import_preparing_file">מכין קובץ לייבוא&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">הוספה</string>

@@ -218,7 +218,6 @@
     <string name="type_in_answer_focus" maxLength="41">Focus ‘type in answer’</string>
     <string name="type_in_answer_focus_summ">Automatically focus the ‘type in answer’ field in the study screen</string>
     <!-- About -->
-    <string name="open_changelog">Open changelog</string>
     <string name="pref_cat_about_title" maxLength="41">Om</string>
     <string name="license">Lisens</string>
     <string name="license_description"><![CDATA[Hayaki is released under the <a href=\"%1$s\">GPL-3.0</a> and <a href=\"%2$s\">AGPL-3.0</a> licenses, with the source code available <a href=\"%3$s\">on GitHub</a>]]></string>

@@ -105,7 +105,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">Μετονομασία</string>
     <string name="checks_action" maxLength="28">Έλεγχος</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">Διαγραφή τράπουλας&#8230;\nΠαρακαλούμε περιμένετε.</string>
-    <string name="info_rate">Αξιολόγηση του AnkiDroid</string>
     <string name="import_title">Εισαγωγή</string>
     <string name="import_preparing_file">Προετοιμασία αρχείου για εισαγωγή&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">Προσθήκη</string>

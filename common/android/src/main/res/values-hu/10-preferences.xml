@@ -216,7 +216,6 @@
     <string name="type_in_answer_focus" maxLength="41">\'válasz begépelés\' kiválasztás</string>
     <string name="type_in_answer_focus_summ">Automatically focus the ‘type in answer’ field in the study screen</string>
     <!-- About -->
-    <string name="open_changelog">Változás napló megnyitása</string>
     <string name="pref_cat_about_title" maxLength="41">Névjegy</string>
     <string name="license">Licensz</string>
     <string name="license_description"><![CDATA[Az Hayaki a <a href=\"%1$s\">GPL-3.</a> és az <a href=\"%2$s\">AGPL-3.0</a> licenc alatt lett kiadva. A forráskód <a href=\"%3$s\"> GitHubon</a> érhető el.]]></string>

@@ -109,7 +109,6 @@
     <string name="rename" comment="Confirm that the renaming action should be processed." maxLength="28">إعادة تسمية</string>
     <string name="checks_action" maxLength="28">تحقق</string>
     <string name="delete_deck" comment="Message on a progress bar starting a deck is being deleted.">جارٍ حذف الرزمة&#8230;</string>
-    <string name="info_rate">قيِّم آنكي درويد</string>
     <string name="import_title">الاستيراد</string>
     <string name="import_preparing_file">يتم تجهيز المِلف للاستيراد&#8230;</string>
     <string name="import_message_add" comment="Adding a new deck to the collection (import)">إضافة</string>

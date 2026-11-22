@@ -216,7 +216,6 @@
     <string name="type_in_answer_focus" maxLength="41">ਫੋਕਸ \'ਜਵਾਬ ਟਾਈਪ ਕਰੋ\'</string>
     <string name="type_in_answer_focus_summ">Automatically focus the ‘type in answer’ field in the study screen</string>
     <!-- About -->
-    <string name="open_changelog">Open changelog</string>
     <string name="pref_cat_about_title" maxLength="41">ਬਾਰੇ</string>
     <string name="license">ਲਾਇਸੰਸ</string>
     <string name="license_description"><![CDATA[Hayaki ਨੂੰ <a href=\"%1$s\">GPL-3.0</a> ਅਤੇ <a href=\"%2$s\">AGPL-3.0</a> ਲਾਇਸੰਸ ਦੇ ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ। , ਸਰੋਤ ਕੋਡ <a href=\"%3$s\">GitHub</a> \'ਤੇ ਉਪਲਬਧ ਹੈ]]></string>

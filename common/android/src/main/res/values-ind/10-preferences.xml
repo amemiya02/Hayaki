@@ -214,7 +214,6 @@
     <string name="type_in_answer_focus" maxLength="41">Fokus \'ketik di jawaban\'</string>
     <string name="type_in_answer_focus_summ">Automatically focus the ‘type in answer’ field in the study screen</string>
     <!-- About -->
-    <string name="open_changelog">Open changelog</string>
     <string name="pref_cat_about_title" maxLength="41">Tentang</string>
     <string name="license">Lisensi</string>
     <string name="license_description"><![CDATA[Hayaki dirilis di bawah lisensi <a href=\"%1$s\">GPL-3.0</a> dan <a href=\"%2$s\">AGPL-3.0</a>, dengan kode sumbernya tersedia <a href=\"%3$s\">di GitHub</a>]]></string>

@@ -223,7 +223,6 @@
     <string name="type_in_answer_focus" maxLength="41">Переходити до «Ввести відповідь»</string>
     <string name="type_in_answer_focus_summ">Автоматично переходити до поля «Ввести відповідь» під час навчання</string>
     <!-- About -->
-    <string name="open_changelog">Відкрити список змін</string>
     <string name="pref_cat_about_title" maxLength="41">Про програму</string>
     <string name="license">Ліцензія</string>
     <string name="license_description"><![CDATA[Hayaki випущений під <a href=\"%1$s\">GPL-3.0</a> і <a href=\"%2$s\">AGPL-3.0</a> ліцензією, з вихідним кодом доступним <a href=\"%3$s\">на GitHub</a>]]></string>
