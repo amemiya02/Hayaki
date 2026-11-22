@@ -1,9 +1,7 @@
 name: 🛠️ Emulator Tests
 
 on:
-  schedule:
-    # Weekly emulator coverage, Monday at 03:17 UTC.
-    - cron: '17 3 * * 1'
+  # On demand only: release checks, see workflows/README.md
   workflow_dispatch:
     inputs:
       release_artifacts_only:
@@ -19,16 +17,6 @@ on:
         required: true
         default: 1
         type: number
-  pull_request:
-  push:
-    # Ignore merge queue branches on push; avoids merge_group+push concurrency race since ref is same
-    branches-ignore:
-      - 'gh-readonly-queue/**'
-      # Dependabot branches are already checked by the pull_request trigger.
-      - 'dependabot/**'
-      # Crowdin translations are already checked by the pull_request trigger.
-      - 'i18n_sync'
-  merge_group:
 
 permissions:
   contents: read

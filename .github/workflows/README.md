@@ -6,25 +6,21 @@ See https://docs.github.com/en/actions for more information.
 
 ## Quality Checks
 
-We run checks on all Pull Requests (PRs). We recommend that when appropriate, developers run the 
-following scripts before submitting a PR.
+Every push to `main` and every pull request runs these two workflows. Run the same commands locally before pushing.
 
-Alternately, you may run the actions on your fork of `Anki-Android`.
+| **Job** | **Command** | **Comments** |
+|---|---|---|
+| [Lint (Kotlin)](lint.yml) | `./gradlew lintAll ktlintCheck --daemon` and `tools/validate-version-code.sh` | Android lint, formatting and the versionCode check |
+| [Unit Tests](tests_unit.yml) | `./gradlew jacocoUnitTestReport --daemon` | Unit tests for every module, on Ubuntu |
 
-| **Job**                                                                                                    | **Command**                                                          | **Comments**                                                                                                                                             |
-|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Lint (Kotlin)](https://github.com/ankidroid/Anki-Android/blob/main/.github/workflows/lint.yml)            | `./gradlew lintAll ktLintCheck lint-rules:test --daemon`             | Android lint rules, formatting and tests for lint rules                                                                                                  |
-| [Lint (JavaScript)](lint.yml) | `python3 -m unittest discover -s .github -p 'test_*.py'` and formatting commands in the workflow | Workflow script tests, Prettier, and localization lint |
-| [Build Logic](https://github.com/ankidroid/Anki-Android/blob/main/.github/workflows/lint.yml)              | `./gradlew -p buildSrc test` and `tools/validate-version-code.sh`    | Version-code bump checks                                                                                                                                 |
-| [Unit Tests](https://github.com/ankidroid/Anki-Android/blob/main/.github/workflows/tests_unit.yml)         | `./gradlew jacocoUnitTestReport --daemon`                            | Unit tests for the Android Project                                                                                                                       |
-| [Emulator Tests](https://github.com/ankidroid/Anki-Android/blob/main/.github/workflows/tests_emulator.yml) | `TEST_RELEASE_BUILD=true ./gradlew jacocoAndroidTestReport --daemon` | Emulator tests for the Android Project.<br/>CI runs `bash .github/disable_art_metrics.sh` and `adb shell settings put global hide_error_dialogs 1` first.<br/>Then runs `ReleaseSmokeTest` from `:baselineprofile` with `TEST_RELEASE_BUILD=false` |
+**Emulator Tests** run only when started by hand: see Release checks below.
 
 ## Release checks
 
 On the Hayaki fork, manually run **Emulator Tests** with `release_device_only=true` against the candidate ref. Leave `release_artifacts_only` off for this run.
 
 ```sh
-gh workflow run tests_emulator.yml --repo amemiya02/Hayaki --ref redesign -f release_device_only=true
+gh workflow run tests_emulator.yml --repo amemiya02/Hayaki --ref main -f release_device_only=true
 ```
 
 The job installs the x86_64 Play release and its instrumentation APK on one Android emulator. It runs the [shared Core Loop scenario](../../AnkiDroid/src/androidTest/assets/hayaki-release/README.md) on an English phone and a wide display at 200% text in Simplified Chinese, Japanese, and Arabic. It also runs WebView tests for Card Template backgrounds, Anki Pages, and MathJax. Download the `hayaki-release-device-<commit>` artifact for screenshots, device and build metadata, and individual instrumentation logs.
