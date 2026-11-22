@@ -125,8 +125,20 @@ fun decide(
     val apkName = variant.assetName(latest)
     val apk = release.assets.firstOrNull { it.name == apkName } ?: return UpdateCheck.Failed("Release has no $apkName")
     val sums = release.assets.firstOrNull { it.name == SHA256SUMS_NAME } ?: return UpdateCheck.Failed("Release has no $SHA256SUMS_NAME")
-    return UpdateCheck.Available(latest, release.body.orEmpty(), apk.url, apkName, sums.url)
+    return UpdateCheck.Available(latest, plainNotes(release.body.orEmpty()), apk.url, apkName, sums.url)
 }
+
+private val HEADING_MARKS = Regex("(?m)^#{1,6}\\s+")
+private val LINK = Regex("\\[([^\\]]+)]\\([^)]*\\)")
+private val EMPHASIS = Regex("\\*\\*|`")
+
+/** The release notes' Markdown as plain text for the dialog: no heading marks, emphasis or link targets. */
+fun plainNotes(markdown: String): String =
+    markdown
+        .replace(LINK, "$1")
+        .replace(HEADING_MARKS, "")
+        .replace(EMPHASIS, "")
+        .trim()
 
 private val SUMS_LINE = Regex("([0-9a-fA-F]{64}) [ *](.+)")
 

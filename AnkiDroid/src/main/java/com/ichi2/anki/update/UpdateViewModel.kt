@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.ichi2.anki.BuildConfig
 import com.ichi2.anki.CommonString
+import com.ichi2.anki.common.time.TimeManager
 import com.ichi2.anki.settings.Prefs
 import com.ichi2.anki.web.HttpFetcher
 import kotlinx.coroutines.CancellationException
@@ -58,7 +59,7 @@ class UpdateViewModel(
 
     /** The deck list's check: only if enabled and 24 hours have passed. Failures are only logged. */
     fun checkAutomatically() {
-        if (!Prefs.isUpdateCheckEnabled || !isCheckDue(Prefs.lastUpdateCheckMillis, System.currentTimeMillis())) return
+        if (!Prefs.isUpdateCheckEnabled || !isCheckDue(Prefs.lastUpdateCheckMillis, TimeManager.time.intTimeMS())) return
         check(manual = false)
     }
 
@@ -69,8 +70,8 @@ class UpdateViewModel(
         if (checkJob?.isActive == true || _state.value != UpdateUiState.Idle) return
         checkJob =
             viewModelScope.launch {
-                val result = checker.check(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE.toLong())
-                Prefs.lastUpdateCheckMillis = nextLastCheckMillis(result, System.currentTimeMillis())
+                val result = checker.check(BuildConfig.VERSION_NAME, installedVersionCode(getApplication()))
+                Prefs.lastUpdateCheckMillis = nextLastCheckMillis(result, TimeManager.time.intTimeMS())
                 when (result) {
                     is UpdateCheck.Available -> _state.value = UpdateUiState.Available(result)
                     UpdateCheck.UpToDate -> if (manual) _messages.send(CommonString.update_up_to_date)

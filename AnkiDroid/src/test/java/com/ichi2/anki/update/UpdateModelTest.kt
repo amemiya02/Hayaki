@@ -137,4 +137,16 @@ class UpdateModelTest {
         assertThat(isCheckDue(succeeded, now + 1.hours.inWholeMilliseconds), equalTo(false))
         assertThat(isCheckDue(succeeded, now + 24.hours.inWholeMilliseconds), equalTo(true))
     }
+
+    @Test
+    fun `release notes show as plain text`() {
+        val notes =
+            "## What's new / 更新内容\n\n- Follows the **Deck row opacity** setting.\n\n" +
+                "See [SHA256SUMS.txt](https://example.com/s) and `colpkg`."
+
+        assertThat(
+            plainNotes(notes),
+            equalTo("What's new / 更新内容\n\n- Follows the Deck row opacity setting.\n\nSee SHA256SUMS.txt and colpkg."),
+        )
+    }
 }

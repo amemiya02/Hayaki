@@ -52,7 +52,7 @@
     <string name="update_check_auto">Check for updates automatically</string>
     <string name="update_available_title">Hayaki %s is available</string>
     <string name="update_action">Update</string>
-    <string name="update_later">Later</string>
+    <string name="update_later" comment="dismiss the update dialog until the next daily check">Later</string>
     <string name="update_downloading">Downloading update…</string>
     <string name="update_up_to_date">You\'re on the latest version</string>
     <string name="update_check_failed">Couldn\'t check for updates</string>

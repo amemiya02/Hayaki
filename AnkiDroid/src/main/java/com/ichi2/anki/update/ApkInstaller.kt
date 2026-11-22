@@ -10,6 +10,7 @@ import android.content.pm.PackageInstaller
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.core.content.pm.PackageInfoCompat
 import com.ichi2.anki.common.utils.android.showThemedToast
 import timber.log.Timber
 import java.io.File
@@ -99,3 +100,10 @@ class InstallResultReceiver : BroadcastReceiver() {
         }
     }
 }
+
+/**
+ * The versionCode of the APK actually installed. Not BuildConfig's: every per-ABI APK shares one
+ * BuildConfig, which holds the first split's (armeabi-v7a) code.
+ */
+fun installedVersionCode(context: Context): Long =
+    PackageInfoCompat.getLongVersionCode(context.packageManager.getPackageInfo(context.packageName, 0))
