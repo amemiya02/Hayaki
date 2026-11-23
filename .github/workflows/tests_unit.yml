@@ -52,11 +52,25 @@ jobs:
         uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
         timeout-minutes: 10
         with:
-          cache-provider: basic
-          # Only main writes the cache, so branches don't evict it
-          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+          # Gradle User Home is cached by the steps around it, not by this action
+          cache-provider: external
+
+      # The basic provider matches only exact keys, and shares its key with lint.yml.
+      # A versionCode bump then started from an empty cache, and lint's entry never
+      # held the Robolectric jars, so Maven Central answered the re-download with 429.
+      # A key of our own with restore keys keeps those jars across build file edits.
+      - name: Restore Gradle User Home
+        id: gradle-home
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-unit-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'gradle/*.versions.toml', 'buildSrc/**') }}
+          restore-keys: gradle-unit-${{ runner.os }}-
 
       - name: Gradle Dependency Download
+        id: gradle-deps
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
         with:
           timeout_minutes: 15
@@ -79,3 +93,24 @@ jobs:
         with:
           name: unit-test-results
           path: "**/build/test-results/"
+
+      # Only main writes the cache, so branches don't evict it. Save once the
+      # dependencies are complete, even if tests fail, and never over an exact hit.
+      - name: Stop Gradle Daemons
+        if: >-
+          always() && github.ref == 'refs/heads/main'
+          && steps.gradle-deps.outcome == 'success'
+          && steps.gradle-home.outputs.cache-hit != 'true'
+        run: ./gradlew --stop
+
+      - name: Save Gradle User Home
+        if: >-
+          always() && github.ref == 'refs/heads/main'
+          && steps.gradle-deps.outcome == 'success'
+          && steps.gradle-home.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ steps.gradle-home.outputs.cache-primary-key }}
