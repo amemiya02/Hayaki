@@ -37,7 +37,7 @@ Matching an Anki Page's colours and typeface to the Redesign without changing it
 _Avoid_: Restyle, theming
 
 **Engine**:
-The part of the app that stores the collection, schedules Cards and syncs it with AnkiWeb or a self-hosted sync server. It stays identical to Upstream.
+The part of the app that stores the collection, schedules Cards and syncs it with AnkiWeb or a self-hosted sync server. It is Upstream's code plus one patch, the opt-in RWKV review queue ([ADR-0009](docs/adr/0009-opt-in-rwkv-scheduling.md)). Sync and storage stay identical to Upstream.
 _Avoid_: Backend, core, libanki
 
 **Card Content**:

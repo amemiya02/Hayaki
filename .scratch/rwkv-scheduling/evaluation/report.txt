@@ -1,0 +1,20 @@
+users scored: 120
+test reviews: 6066253
+log loss, review-weighted, p_rwkv: 0.25288
+log loss, review-weighted, p_fsrs: 0.32179
+log loss, review-weighted, p_fsrs_default: 0.34399
+log loss, user average, p_rwkv: 0.26992
+log loss, user average, p_fsrs: 0.33096
+users where RWKV is lower: 120; FSRS-6 lower: 0
+RWKV relative to FSRS-6 (review-weighted): -21.41%
+
+interval	reviews	actual	mean RWKV	mean FSRS-6	LL RWKV	LL FSRS-6
+1 d	931269	0.839	0.837	0.857	0.3019	0.3592
+2-7 d	2194231	0.879	0.878	0.877	0.2451	0.3110
+8-30 d	1603275	0.880	0.880	0.881	0.2295	0.3141
+31-89 d	699200	0.862	0.862	0.862	0.2638	0.3257
+90-365 d	516393	0.854	0.854	0.851	0.2611	0.3185
+366-1095 d	114011	0.865	0.871	0.847	0.2282	0.3177
+>1095 d	7874	0.853	0.852	0.761	0.2419	0.3983
+
+users where RWKV is worse by more than 0.02 (user, test reviews, LL RWKV, LL FSRS-6, total rows):

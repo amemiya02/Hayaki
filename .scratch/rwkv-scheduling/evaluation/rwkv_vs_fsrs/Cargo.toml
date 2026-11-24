@@ -1,0 +1,14 @@
+[package]
+name = "rwkv_vs_fsrs"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+fushi_rwkv = { git = "https://github.com/hajisensai/Fushi", rev = "07940eaef04a871fb3d89457b320abfe6ae2b752" }
+# The version upstream Anki 26.09.4 pins (vendor/anki/Cargo.lock).
+fsrs = "=6.6.2"
+rayon = "1.12.0"
+
+[profile.release]
+opt-level = 3
