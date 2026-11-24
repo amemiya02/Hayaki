@@ -4,7 +4,6 @@
 <resources>
     <string name="rwkv_scheduling_title">用 RWKV 安排复习</string>
     <string name="rwkv_scheduling_summary">RWKV 模型预测你记住某张复习卡的概率降到牌组的目标保留率时，这张卡就到期。新卡、学习中的卡，以及 Anki 存下的所有到期日都不变，所以关掉后会立刻回到平常的排程。这个开关随集合同步：如果另一台设备之后改了任何偏好设置并先同步，可能会把开关改回去。打开后会下载模型（约 430 KB），作者允许个人和研究使用。</string>
-    <string name="rwkv_status_off">已关闭</string>
     <string name="rwkv_status_waiting">等待开始</string>
     <string name="rwkv_status_downloading">正在下载模型</string>
     <string name="rwkv_status_preparing">正在读取复习记录：%1$d / %2$d</string>

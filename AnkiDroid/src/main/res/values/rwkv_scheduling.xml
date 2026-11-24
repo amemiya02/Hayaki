@@ -4,7 +4,6 @@
 <resources>
     <string name="rwkv_scheduling_title">Schedule reviews with RWKV</string>
     <string name="rwkv_scheduling_summary">Review cards come due when an RWKV model predicts that your chance of recalling them has fallen to the deck’s desired retention. New and learning cards, and every due date Anki stores, are unchanged, so turning this off returns to your usual schedule at once. The switch syncs with your collection: if another device changes any preference later and syncs first, it can turn the switch back. Turning it on downloads the model (about 430 KB); its author allows personal and research use.</string>
-    <string name="rwkv_status_off">Off</string>
     <string name="rwkv_status_waiting">Waiting to start</string>
     <string name="rwkv_status_downloading">Downloading the model</string>
     <string name="rwkv_status_preparing">Reading your review history: %1$d of %2$d</string>
