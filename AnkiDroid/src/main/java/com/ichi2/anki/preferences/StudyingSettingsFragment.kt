@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import anki.config.Preferences
+import anki.zz_hayaki.RwkvStatusResponse
 import com.ichi2.anki.CollectionManager.TR
 import com.ichi2.anki.CollectionManager.withCol
 import com.ichi2.anki.CommonPlurals
@@ -32,9 +33,11 @@ import com.ichi2.anki.CommonString
 import com.ichi2.anki.R
 import com.ichi2.anki.common.analytics.Analytics
 import com.ichi2.anki.common.analytics.AnalyticsEvent
+import com.ichi2.anki.common.utils.android.showThemedToast
 import com.ichi2.anki.launchCatchingTask
 import com.ichi2.anki.preferences.components.PreferenceStepperCard
 import com.ichi2.anki.preferences.reviewer.ReviewerMenuSettingsFragment
+import com.ichi2.anki.scheduling.RwkvScheduling
 import com.ichi2.anki.utils.CollectionPreferences
 import com.ichi2.anki.utils.ext.sharedPrefs
 import com.ichi2.compose.ui.dialogs.DialogAction
@@ -43,13 +46,20 @@ import com.ichi2.compose.ui.dialogs.DialogChoice
 import com.ichi2.compose.ui.dialogs.PaperDialog
 import com.ichi2.compose.ui.dialogs.SingleChoiceDialog
 import com.ichi2.utils.FragmentFactoryUtils
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import timber.log.Timber
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 class StudyingSettingsFragment : Fragment() {
     private var collectionSettings by mutableStateOf<Preferences?>(null)
+    private var rwkvStatus by mutableStateOf<RwkvStatusResponse?>(null)
+    private var rwkvPolling: Job? = null
     private val collectionWrites = Mutex()
 
     override fun onCreateView(
@@ -72,6 +82,9 @@ class StudyingSettingsFragment : Fragment() {
                 onChangeLearnAhead = { minutes ->
                     editCollection { CollectionPreferences.setLearnAheadLimit(minutes.toDuration(DurationUnit.MINUTES)) }
                 },
+                rwkvStatus = rwkvStatus,
+                onChangeRwkv = { enabled -> changeRwkv { RwkvScheduling.setEnabled(requireContext(), enabled) } },
+                onRetryRwkv = { changeRwkv { RwkvScheduling.prepare(requireContext()) } },
                 onChangeCollectionSwitch = { setting, checked ->
                     editCollection {
                         when (setting) {
@@ -89,6 +102,40 @@ class StudyingSettingsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         editCollection {}
+        pollRwkv()
+    }
+
+    override fun onPause() {
+        rwkvPolling?.cancel()
+        super.onPause()
+    }
+
+    /** Refreshes the RWKV status, every second while the Engine prepares. */
+    private fun pollRwkv() {
+        rwkvPolling?.cancel()
+        rwkvPolling =
+            launchCatchingTask {
+                while (isActive) {
+                    val status = RwkvScheduling.status()
+                    rwkvStatus = status
+                    val preparing =
+                        status.enabled &&
+                            (status.state == RwkvStatusResponse.State.PREPARING || status.state == RwkvStatusResponse.State.NOT_PREPARED)
+                    delay(if (preparing) 1.seconds else 5.seconds)
+                }
+            }
+    }
+
+    private fun changeRwkv(change: suspend () -> Unit) {
+        launchCatchingTask {
+            try {
+                change()
+            } catch (e: Exception) {
+                Timber.w(e, "RWKV scheduling")
+                showThemedToast(requireContext(), R.string.rwkv_scheduling_save_error, shortLength = true)
+            }
+            rwkvStatus = RwkvScheduling.status()
+        }
     }
 
     private fun editCollection(edit: suspend () -> Unit) {
@@ -215,6 +262,9 @@ private fun StudyingSettings(
     onRelated: (SettingsGroup) -> Unit,
     onChangeRollover: (Int) -> Unit,
     onChangeLearnAhead: (Int) -> Unit,
+    rwkvStatus: RwkvStatusResponse?,
+    onChangeRwkv: (Boolean) -> Unit,
+    onRetryRwkv: () -> Unit,
     onChangeCollectionSwitch: (StudySetting, Boolean) -> Unit,
 ) {
     val configuration = LocalConfiguration.current
@@ -342,6 +392,9 @@ private fun StudyingSettings(
                     }
                 }
             }
+            if (section == StudySection.SCHEDULING) {
+                RwkvSchedulingRows(rwkvStatus, onChangeRwkv, onRetryRwkv)
+            }
         }
         SettingsSectionTitle(stringResource(CommonString.related_settings_title))
         SettingsDivider()
@@ -425,4 +478,35 @@ private fun LearnAheadLimitDialog(
             unitSuffix = { "" },
         )
     }
+}
+
+/** The RWKV scheduling switch and its status (ADR-0009). */
+@Composable
+private fun RwkvSchedulingRows(
+    status: RwkvStatusResponse?,
+    onChange: (Boolean) -> Unit,
+    onRetry: () -> Unit,
+) {
+    SettingsSwitchRow(
+        title = stringResource(R.string.rwkv_scheduling_title),
+        summary = stringResource(R.string.rwkv_scheduling_summary),
+        checked = status?.enabled == true,
+        onChange = onChange,
+        enabled = status != null,
+    )
+    if (status?.enabled != true) return
+    val failed = status.state == RwkvStatusResponse.State.FAILED
+    val text =
+        when (status.state) {
+            RwkvStatusResponse.State.READY -> stringResource(R.string.rwkv_status_ready)
+            RwkvStatusResponse.State.PREPARING ->
+                if (status.total > 0) {
+                    stringResource(R.string.rwkv_status_preparing, status.done, status.total)
+                } else {
+                    stringResource(R.string.rwkv_status_downloading)
+                }
+            RwkvStatusResponse.State.FAILED -> stringResource(R.string.rwkv_status_failed, status.error)
+            else -> stringResource(R.string.rwkv_status_waiting)
+        }
+    SettingsRow(title = text, onClick = if (failed) onRetry else null)
 }

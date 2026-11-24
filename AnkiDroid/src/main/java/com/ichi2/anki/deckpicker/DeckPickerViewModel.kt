@@ -13,6 +13,7 @@ import anki.collection.OpChanges
 import anki.decks.SetDeckCollapsedRequest
 import anki.i18n.GeneratedTranslations
 import anki.sync.SyncStatusResponse
+import com.ichi2.anki.AnkiDroidApp
 import com.ichi2.anki.CollectionManager
 import com.ichi2.anki.CollectionManager.TR
 import com.ichi2.anki.CollectionManager.withCol
@@ -45,6 +46,7 @@ import com.ichi2.anki.progress.HasProgress
 import com.ichi2.anki.progress.ProgressManager
 import com.ichi2.anki.rememberSyncEndpoint
 import com.ichi2.anki.reviewreminders.ScheduleRemindersDestination
+import com.ichi2.anki.scheduling.RwkvScheduling
 import com.ichi2.anki.settings.Prefs
 import com.ichi2.anki.sync.MeteredSyncPolicy
 import com.ichi2.anki.sync.syncStatus
@@ -495,6 +497,8 @@ class DeckPickerViewModel :
             // uses user's desktop settings to determine whether a backup
             // actually happens
             launchCatchingIO { performBackupInBackground() }
+            // RWKV scheduling prepares in the background when its switch is on
+            launchCatchingIO { RwkvScheduling.prepareIfEnabled(AnkiDroidApp.instance) }
         }
         Timber.d("updateDeckList")
         reloadDeckCounts().join()
