@@ -31,6 +31,11 @@ repositories {
     google()
     mavenCentral()
     maven { url = uri("https://jitpack.io") }
+    // The Hayaki Engine (ADR-0009), resolved only from its own Maven branch.
+    exclusiveContent {
+        forRepository { maven(url = "https://raw.githubusercontent.com/amemiya02/Anki-Android-Backend/maven/") }
+        filter { includeGroup("io.github.amemiya02") }
+    }
 }
 
 keeper {

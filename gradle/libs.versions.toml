@@ -76,8 +76,9 @@ androidxViewpager2 = "1.1.0"
 androidxWebkit = "1.16.0"
 # https://developer.android.com/jetpack/androidx/releases/work
 androidxWork = "2.12.0"
-# https://github.com/ankidroid/Anki-Android-Backend/
-ankiBackend = '0.1.77-anki26.09.4' # Also update expectedPolicy in PageWebViewClientAssetTest
+# The Hayaki Engine: https://github.com/amemiya02/Anki-Android-Backend/ (branch hayaki-rwkv), published to its
+# maven branch as upstream's version plus the Engine fork commit. Also update expectedPolicy in PageWebViewClientAssetTest
+ankiBackend = '0.1.77-anki26.09.4-hayaki.3e8f35062'
 autoService = "1.1.1"
 autoServiceAnnotations = "1.1.1"
 # https://commons.apache.org/proper/commons-collections/changes.html
@@ -186,9 +187,9 @@ commons-collections4 = { module = "org.apache.commons:commons-collections4", ver
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commonsCompress" }
 desugar-jdk-libs-nio = { module = "com.android.tools:desugar_jdk_libs_nio", version.ref = "desugar-jdk-libs-nio" }
 drakeet-drawer = { module = "com.drakeet.drawer:drawer", version.ref = "drawer" }
-ankiBackend-backend = { module = "io.github.david-allison:anki-backend-android", version.ref = "ankiBackend" }
-ankiBackend-core = { module = "io.github.david-allison:anki-backend-core", version.ref = "ankiBackend" }
-ankiBackend-testing = { module = "io.github.david-allison:anki-android-backend-testing", version.ref = "ankiBackend" }
+ankiBackend-backend = { module = "io.github.amemiya02:anki-backend-android", version.ref = "ankiBackend" }
+ankiBackend-core = { module = "io.github.amemiya02:anki-backend-core", version.ref = "ankiBackend" }
+ankiBackend-testing = { module = "io.github.amemiya02:anki-android-backend-testing", version.ref = "ankiBackend" }
 java-semver = { module = "com.github.zafarkhaja:java-semver", version.ref = "javaSemver" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
