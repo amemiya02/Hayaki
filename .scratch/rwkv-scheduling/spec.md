@@ -70,7 +70,7 @@ Use the model's immediate head, not its curve head. Fushi measured both on 20 he
 
 ### Model
 
-Use the small model `sm56` (331,511 parameters) with int4 state on all three apps. Fushi measured about 2.9 KB of state per Card with one Card per note, and about 50,000 replayed reviews per second on a 16-thread desktop. On 295 held-out users it scored a log loss of 0.270 against 0.282 for the large model (2,762,884 parameters, about 25 KB per Card at int8). Hayaki does not offer the large model.
+Use the small model `sm56` (331,511 parameters) with int4 state on all three apps. Fushi measured about 2.9 KB of state per Card with one Card per note, and about 50,000 replayed reviews per second on a 16-thread desktop. On 295 held-out users it scored a log loss of 0.270 against 0.282 for the large model (2,762,884 parameters, about 25 KB per Card at int8). Hayaki does not offer the large model. (Superseded on 2026-11-25: the learner now chooses Big, Small or Tiny, with Small as the default; see ADR-0009.)
 
 Download `sm56/weights.int8.bin` from the author's pinned commit when the learner first turns the switch on, and check its size and SHA-256 (`479b3e2b…`, the full value is in Fushi's `srs_rwkv_models.dart`). Do not bundle it and do not host a copy. `WEIGHTS-NOTICE.md` in `JSchoreels/anki-rwkv` limits the weights to personal and research use until redistribution is settled.
 

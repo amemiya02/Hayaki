@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
-<!-- RWKV scheduling switch (ADR-0009). -->
+<!-- RWKV scheduling switch and model (ADR-0009). -->
 <resources>
     <string name="rwkv_scheduling_title">用 RWKV 安排复习</string>
-    <string name="rwkv_scheduling_summary">RWKV 模型预测你记住某张复习卡的概率降到牌组的目标保留率时，这张卡就到期。新卡、学习中的卡，以及 Anki 存下的所有到期日都不变，所以关掉后会立刻回到平常的排程。这个开关随集合同步：如果另一台设备之后改了任何偏好设置并先同步，可能会把开关改回去。打开后会下载模型（约 430 KB），作者允许个人和研究使用。</string>
+    <string name="rwkv_scheduling_summary">RWKV 模型根据你的复习记录，预测你此刻还记得每张复习卡的概率。概率降到牌组的目标保留率时卡片到期，最可能已经忘掉的卡排在最前。新卡和学习中的卡照常安排。Anki 存下的到期日始终不变，所以关掉后立刻回到平常的排程。</string>
     <string name="rwkv_status_waiting">等待开始</string>
     <string name="rwkv_status_downloading">正在下载模型</string>
     <string name="rwkv_status_preparing">正在读取复习记录：%1$d / %2$d</string>
     <string name="rwkv_status_ready">已就绪，复习卡由 RWKV 选择。</string>
     <string name="rwkv_status_failed">RWKV 无法启动，复习使用平常的排程。点按重试。%s</string>
     <string name="rwkv_scheduling_save_error">无法更改 RWKV 排程</string>
+    <string name="rwkv_model_title">模型</string>
+    <string name="rwkv_model_big">Big</string>
+    <string name="rwkv_model_small">Small</string>
+    <string name="rwkv_model_tiny">Tiny</string>
+    <string name="rwkv_model_big_summary">最准。下载约 11 MB，每张卡占用内存约 26 KB（约为 Small 的 9 倍），读取复习记录比 Small 慢约 4 倍。</string>
+    <string name="rwkv_model_small_summary">默认。下载约 430 KB，每张卡占用内存约 3 KB。</string>
+    <string name="rwkv_model_tiny_summary">下载约 240 KB，读取复习记录比 Small 快约 1.6 倍，每张卡占用内存与 Small 相近。</string>
+    <string name="rwkv_model_hint">换模型时会先下载（已下载的不再下载），再重新读取复习记录，完成前复习使用平常的排程。选择随集合同步。</string>
+    <string name="rwkv_model_save_error">无法更改 RWKV 模型。</string>
 </resources>

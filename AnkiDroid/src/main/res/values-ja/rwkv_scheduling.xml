@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
-<!-- RWKV scheduling switch (ADR-0009). -->
+<!-- RWKV scheduling switch and model (ADR-0009). -->
 <resources>
     <string name="rwkv_scheduling_title">RWKV で復習を組む</string>
-    <string name="rwkv_scheduling_summary">RWKV モデルが予測する想起確率がデッキの目標保持率まで下がると、その復習カードが期日になります。新規カード・学習中のカードと、Anki が保存する期日はすべて変わらないため、オフにするとすぐに通常のスケジュールに戻ります。このスイッチはコレクションと同期します。別の端末が後で設定を変更して先に同期すると、スイッチが戻ることがあります。オンにするとモデル（約 430 KB）をダウンロードします。作者は個人利用と研究利用を認めています。</string>
+    <string name="rwkv_scheduling_summary">RWKV モデルが復習履歴から、各復習カードを今思い出せる確率を予測します。その確率がデッキの目標保持率まで下がるとカードが期日になり、忘れている可能性が高いカードから出題されます。新規カードと学習中のカードは通常どおりです。Anki が保存している期日は一切変えないため、オフにするとすぐに通常のスケジュールに戻ります。</string>
     <string name="rwkv_status_waiting">開始待ち</string>
     <string name="rwkv_status_downloading">モデルをダウンロード中</string>
     <string name="rwkv_status_preparing">復習履歴を読み込み中：%1$d / %2$d</string>
     <string name="rwkv_status_ready">準備完了。復習カードは RWKV が選びます。</string>
     <string name="rwkv_status_failed">RWKV を開始できないため、復習は通常のスケジュールです。タップして再試行。%s</string>
     <string name="rwkv_scheduling_save_error">RWKV スケジュールを変更できません</string>
+    <string name="rwkv_model_title">モデル</string>
+    <string name="rwkv_model_big">Big</string>
+    <string name="rwkv_model_small">Small</string>
+    <string name="rwkv_model_tiny">Tiny</string>
+    <string name="rwkv_model_big_summary">最も正確。ダウンロードは約 11 MB、メモリはカード 1 枚あたり約 26 KB（Small の約 9 倍）、復習履歴の読み込みは Small より約 4 倍遅くなります。</string>
+    <string name="rwkv_model_small_summary">既定。ダウンロードは約 430 KB、メモリはカード 1 枚あたり約 3 KB です。</string>
+    <string name="rwkv_model_tiny_summary">ダウンロードは約 240 KB、復習履歴の読み込みは Small の約 1.6 倍速く、メモリは Small とほぼ同じです。</string>
+    <string name="rwkv_model_hint">モデルを変えると、必要ならダウンロードしてから復習履歴を読み直します。それまでは通常のスケジュールで復習します。選択はコレクションと同期します。</string>
+    <string name="rwkv_model_save_error">RWKV モデルを変更できません。</string>
 </resources>

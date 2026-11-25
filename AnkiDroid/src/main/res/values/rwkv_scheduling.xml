@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
-<!-- RWKV scheduling switch (ADR-0009). -->
+<!-- RWKV scheduling switch and model (ADR-0009). -->
 <resources>
     <string name="rwkv_scheduling_title">Schedule reviews with RWKV</string>
-    <string name="rwkv_scheduling_summary">Review cards come due when an RWKV model predicts that your chance of recalling them has fallen to the deck’s desired retention. New and learning cards, and every due date Anki stores, are unchanged, so turning this off returns to your usual schedule at once. The switch syncs with your collection: if another device changes any preference later and syncs first, it can turn the switch back. Turning it on downloads the model (about 430 KB); its author allows personal and research use.</string>
+    <string name="rwkv_scheduling_summary">An RWKV model reads your review history and predicts how likely you are to recall each review card right now. A card comes due when that chance falls to its deck’s desired retention, and the cards you are most likely to have forgotten come first. New and learning cards are scheduled as usual. Anki’s stored due dates are never changed, so turning this off brings back your usual schedule at once.</string>
     <string name="rwkv_status_waiting">Waiting to start</string>
     <string name="rwkv_status_downloading">Downloading the model</string>
     <string name="rwkv_status_preparing">Reading your review history: %1$d of %2$d</string>
     <string name="rwkv_status_ready">Ready. Review cards are chosen by RWKV.</string>
     <string name="rwkv_status_failed">RWKV could not start, so reviews use your usual schedule. Tap to try again. %s</string>
     <string name="rwkv_scheduling_save_error">RWKV scheduling could not be changed</string>
+    <string name="rwkv_model_title">Model</string>
+    <string name="rwkv_model_big">Big</string>
+    <string name="rwkv_model_small">Small</string>
+    <string name="rwkv_model_tiny">Tiny</string>
+    <string name="rwkv_model_big_summary">The most accurate. An 11 MB download, about 26 KB of memory per card (about 9 times Small), and about 4 times slower than Small to read your review history.</string>
+    <string name="rwkv_model_small_summary">The default. A 430 KB download and about 3 KB of memory per card.</string>
+    <string name="rwkv_model_tiny_summary">A 240 KB download that reads your review history about 1.6 times faster than Small, with about the same memory per card.</string>
+    <string name="rwkv_model_hint">Choosing another model downloads it if needed and reads your review history again. Until then, reviews use your usual schedule. The choice syncs with your collection.</string>
+    <string name="rwkv_model_save_error">The RWKV model could not be changed.</string>
 </resources>

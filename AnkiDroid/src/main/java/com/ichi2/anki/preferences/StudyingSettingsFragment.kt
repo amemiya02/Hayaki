@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ArrayRes
 import androidx.annotation.StringRes
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -25,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import anki.config.Preferences
+import anki.zz_hayaki.RwkvModel
 import anki.zz_hayaki.RwkvStatusResponse
 import com.ichi2.anki.CollectionManager.TR
 import com.ichi2.anki.CollectionManager.withCol
@@ -40,6 +43,7 @@ import com.ichi2.anki.preferences.reviewer.ReviewerMenuSettingsFragment
 import com.ichi2.anki.scheduling.RwkvScheduling
 import com.ichi2.anki.utils.CollectionPreferences
 import com.ichi2.anki.utils.ext.sharedPrefs
+import com.ichi2.compose.theme.foundation
 import com.ichi2.compose.ui.dialogs.DialogAction
 import com.ichi2.compose.ui.dialogs.DialogActionStyle
 import com.ichi2.compose.ui.dialogs.DialogChoice
@@ -85,6 +89,9 @@ class StudyingSettingsFragment : Fragment() {
                 rwkvStatus = rwkvStatus,
                 onChangeRwkv = { enabled -> changeRwkv { RwkvScheduling.setEnabled(requireContext(), enabled) } },
                 onRetryRwkv = { changeRwkv { RwkvScheduling.prepare(requireContext()) } },
+                onChangeRwkvModel = { model ->
+                    changeRwkv(R.string.rwkv_model_save_error) { RwkvScheduling.setModel(requireContext(), model) }
+                },
                 onChangeCollectionSwitch = { setting, checked ->
                     editCollection {
                         when (setting) {
@@ -126,13 +133,16 @@ class StudyingSettingsFragment : Fragment() {
             }
     }
 
-    private fun changeRwkv(change: suspend () -> Unit) {
+    private fun changeRwkv(
+        @StringRes error: Int = R.string.rwkv_scheduling_save_error,
+        change: suspend () -> Unit,
+    ) {
         launchCatchingTask {
             try {
                 change()
             } catch (e: Exception) {
                 Timber.w(e, "RWKV scheduling")
-                showThemedToast(requireContext(), R.string.rwkv_scheduling_save_error, shortLength = true)
+                showThemedToast(requireContext(), error, shortLength = true)
             }
             rwkvStatus = RwkvScheduling.status()
         }
@@ -265,6 +275,7 @@ private fun StudyingSettings(
     rwkvStatus: RwkvStatusResponse?,
     onChangeRwkv: (Boolean) -> Unit,
     onRetryRwkv: () -> Unit,
+    onChangeRwkvModel: (RwkvModel) -> Unit,
     onChangeCollectionSwitch: (StudySetting, Boolean) -> Unit,
 ) {
     val configuration = LocalConfiguration.current
@@ -393,7 +404,7 @@ private fun StudyingSettings(
                 }
             }
             if (section == StudySection.SCHEDULING) {
-                RwkvSchedulingRows(rwkvStatus, onChangeRwkv, onRetryRwkv)
+                RwkvSchedulingRows(rwkvStatus, onChangeRwkv, onChangeRwkvModel, onRetryRwkv)
             }
         }
         SettingsSectionTitle(stringResource(CommonString.related_settings_title))
@@ -480,13 +491,33 @@ private fun LearnAheadLimitDialog(
     }
 }
 
-/** The RWKV scheduling switch and its status (ADR-0009). */
+private val rwkvModels = listOf(RwkvModel.RWKV_MODEL_BIG, RwkvModel.RWKV_MODEL_SMALL, RwkvModel.RWKV_MODEL_TINY)
+
+@StringRes
+private fun RwkvModel.nameRes(): Int =
+    when (this) {
+        RwkvModel.RWKV_MODEL_BIG -> R.string.rwkv_model_big
+        RwkvModel.RWKV_MODEL_TINY -> R.string.rwkv_model_tiny
+        else -> R.string.rwkv_model_small
+    }
+
+@StringRes
+private fun RwkvModel.summaryRes(): Int =
+    when (this) {
+        RwkvModel.RWKV_MODEL_BIG -> R.string.rwkv_model_big_summary
+        RwkvModel.RWKV_MODEL_TINY -> R.string.rwkv_model_tiny_summary
+        else -> R.string.rwkv_model_small_summary
+    }
+
+/** The RWKV scheduling switch, its model and its status (ADR-0009). */
 @Composable
 private fun RwkvSchedulingRows(
     status: RwkvStatusResponse?,
     onChange: (Boolean) -> Unit,
+    onChangeModel: (RwkvModel) -> Unit,
     onRetry: () -> Unit,
 ) {
+    var pickingModel by rememberSaveable { mutableStateOf(false) }
     SettingsSwitchRow(
         title = stringResource(R.string.rwkv_scheduling_title),
         summary = stringResource(R.string.rwkv_scheduling_summary),
@@ -495,6 +526,33 @@ private fun RwkvSchedulingRows(
         enabled = status != null,
     )
     if (status?.enabled != true) return
+    // The Engine owns the choice: the row shows status.model and never a local copy.
+    SettingsRow(
+        title = stringResource(R.string.rwkv_model_title),
+        summary = stringResource(status.model.summaryRes()),
+        onClick = { pickingModel = true },
+        trailing = {
+            Text(
+                stringResource(status.model.nameRes()),
+                style = MaterialTheme.foundation.type.body,
+                color = MaterialTheme.foundation.colors.onBackgroundMuted,
+            )
+        },
+    )
+    if (pickingModel) {
+        val dismiss = { pickingModel = false }
+        SingleChoiceDialog(
+            stringResource(R.string.rwkv_model_title),
+            rwkvModels.map { DialogChoice(stringResource(it.nameRes()), stringResource(it.summaryRes())) },
+            selectedIndex = rwkvModels.indexOf(status.model),
+            onSelect = {
+                dismiss()
+                onChangeModel(rwkvModels[it])
+            },
+            onDismissRequest = dismiss,
+            hint = stringResource(R.string.rwkv_model_hint),
+        )
+    }
     val failed = status.state == RwkvStatusResponse.State.FAILED
     val text =
         when (status.state) {
