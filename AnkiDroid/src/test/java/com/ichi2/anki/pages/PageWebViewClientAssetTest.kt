@@ -25,7 +25,7 @@ class PageWebViewClientAssetTest : PageWebViewClientTestBase() {
 
         // Pin the entire declaration, including the bootstrap script hash, to require review on backend updates.
         // Backend updates are expected to change this hash and fail this test until the new declaration is reviewed.
-        val expectedPolicy = "script-src 'self' 'sha256-fJlP4ko1M77acPklcXV9GHwlfzrFv0ey1sgOB1DiJRQ='"
+        val expectedPolicy = "script-src 'self' 'sha256-k45lsCQp1krZqYbWSWTP8b7meTEMhDRXC2Gf7WkKOpU='"
         assertEquals(
             listOf(expectedPolicy),
             policies,
