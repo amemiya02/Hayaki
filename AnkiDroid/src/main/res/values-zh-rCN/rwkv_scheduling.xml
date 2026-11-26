@@ -4,6 +4,8 @@
 <resources>
     <string name="rwkv_scheduling_title">用 RWKV 安排复习</string>
     <string name="rwkv_scheduling_summary">RWKV 模型根据你的复习记录，预测你此刻还记得每张复习卡的概率。概率降到牌组的目标保留率时卡片到期，最可能已经忘掉的卡排在最前。新卡和学习中的卡照常安排。Anki 存下的到期日始终不变，所以关掉后立刻回到平常的排程。</string>
+    <string name="rwkv_daily_list_title">固定每天的复习名单</string>
+    <string name="rwkv_daily_list_summary">每天第一次学习时定下当天要复习的卡，复习完的卡当天不再出现。</string>
     <string name="rwkv_status_waiting">等待开始</string>
     <string name="rwkv_status_downloading">正在下载模型</string>
     <string name="rwkv_status_preparing">正在读取复习记录：%1$d / %2$d</string>

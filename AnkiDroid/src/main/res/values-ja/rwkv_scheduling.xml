@@ -4,6 +4,8 @@
 <resources>
     <string name="rwkv_scheduling_title">RWKV で復習を組む</string>
     <string name="rwkv_scheduling_summary">RWKV モデルが復習履歴から、各復習カードを今思い出せる確率を予測します。その確率がデッキの目標保持率まで下がるとカードが期日になり、忘れている可能性が高いカードから出題されます。新規カードと学習中のカードは通常どおりです。Anki が保存している期日は一切変えないため、オフにするとすぐに通常のスケジュールに戻ります。</string>
+    <string name="rwkv_daily_list_title">今日の復習リストを固定</string>
+    <string name="rwkv_daily_list_summary">最初の学習時に、その日の復習カードを一度だけ選びます。終えたカードは明日まで戻ってきません。</string>
     <string name="rwkv_status_waiting">開始待ち</string>
     <string name="rwkv_status_downloading">モデルをダウンロード中</string>
     <string name="rwkv_status_preparing">復習履歴を読み込み中：%1$d / %2$d</string>

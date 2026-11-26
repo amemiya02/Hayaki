@@ -25,6 +25,9 @@ import java.security.MessageDigest
 object RwkvScheduling {
     const val CONFIG_KEY = "hayakiRwkvScheduling"
 
+    /** Synced boolean, false when absent: RWKV chooses the day's review cards once, at the first study of the day. */
+    const val DAILY_LIST_CONFIG_KEY = "hayakiRwkvDailyList"
+
     /** Shared by every collection, outside the collection folder. */
     fun weightsDirectory(context: Context): File = File(context.filesDir, "rwkv")
 
@@ -71,6 +74,12 @@ object RwkvScheduling {
     ) {
         withCol { config.set(CONFIG_KEY, enabled) }
         if (enabled) prepare(context)
+    }
+
+    suspend fun dailyList(): Boolean = withCol { config.get(DAILY_LIST_CONFIG_KEY, false) } ?: false
+
+    suspend fun setDailyList(enabled: Boolean) {
+        withCol { config.set(DAILY_LIST_CONFIG_KEY, enabled) }
     }
 
     /** Chooses the model, which syncs with the collection. With the switch on, prepares it. */

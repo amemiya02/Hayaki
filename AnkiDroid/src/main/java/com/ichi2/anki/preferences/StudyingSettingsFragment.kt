@@ -63,6 +63,7 @@ import kotlin.time.toDuration
 class StudyingSettingsFragment : Fragment() {
     private var collectionSettings by mutableStateOf<Preferences?>(null)
     private var rwkvStatus by mutableStateOf<RwkvStatusResponse?>(null)
+    private var rwkvDailyList by mutableStateOf(false)
     private var rwkvPolling: Job? = null
     private val collectionWrites = Mutex()
 
@@ -89,6 +90,8 @@ class StudyingSettingsFragment : Fragment() {
                 rwkvStatus = rwkvStatus,
                 onChangeRwkv = { enabled -> changeRwkv { RwkvScheduling.setEnabled(requireContext(), enabled) } },
                 onRetryRwkv = { changeRwkv { RwkvScheduling.prepare(requireContext()) } },
+                rwkvDailyList = rwkvDailyList,
+                onChangeRwkvDailyList = { enabled -> changeRwkv { RwkvScheduling.setDailyList(enabled) } },
                 onChangeRwkvModel = { model ->
                     changeRwkv(R.string.rwkv_model_save_error) { RwkvScheduling.setModel(requireContext(), model) }
                 },
@@ -125,6 +128,7 @@ class StudyingSettingsFragment : Fragment() {
                 while (isActive) {
                     val status = RwkvScheduling.status()
                     rwkvStatus = status
+                    rwkvDailyList = RwkvScheduling.dailyList()
                     val preparing =
                         status.enabled &&
                             (status.state == RwkvStatusResponse.State.PREPARING || status.state == RwkvStatusResponse.State.NOT_PREPARED)
@@ -145,6 +149,7 @@ class StudyingSettingsFragment : Fragment() {
                 showThemedToast(requireContext(), error, shortLength = true)
             }
             rwkvStatus = RwkvScheduling.status()
+            rwkvDailyList = RwkvScheduling.dailyList()
         }
     }
 
@@ -275,6 +280,8 @@ private fun StudyingSettings(
     rwkvStatus: RwkvStatusResponse?,
     onChangeRwkv: (Boolean) -> Unit,
     onRetryRwkv: () -> Unit,
+    rwkvDailyList: Boolean,
+    onChangeRwkvDailyList: (Boolean) -> Unit,
     onChangeRwkvModel: (RwkvModel) -> Unit,
     onChangeCollectionSwitch: (StudySetting, Boolean) -> Unit,
 ) {
@@ -404,7 +411,7 @@ private fun StudyingSettings(
                 }
             }
             if (section == StudySection.SCHEDULING) {
-                RwkvSchedulingRows(rwkvStatus, onChangeRwkv, onChangeRwkvModel, onRetryRwkv)
+                RwkvSchedulingRows(rwkvStatus, onChangeRwkv, onChangeRwkvModel, rwkvDailyList, onChangeRwkvDailyList, onRetryRwkv)
             }
         }
         SettingsSectionTitle(stringResource(CommonString.related_settings_title))
@@ -515,6 +522,8 @@ private fun RwkvSchedulingRows(
     status: RwkvStatusResponse?,
     onChange: (Boolean) -> Unit,
     onChangeModel: (RwkvModel) -> Unit,
+    dailyList: Boolean,
+    onChangeDailyList: (Boolean) -> Unit,
     onRetry: () -> Unit,
 ) {
     var pickingModel by rememberSaveable { mutableStateOf(false) }
@@ -553,6 +562,12 @@ private fun RwkvSchedulingRows(
             hint = stringResource(R.string.rwkv_model_hint),
         )
     }
+    SettingsSwitchRow(
+        title = stringResource(R.string.rwkv_daily_list_title),
+        summary = stringResource(R.string.rwkv_daily_list_summary),
+        checked = dailyList,
+        onChange = onChangeDailyList,
+    )
     val failed = status.state == RwkvStatusResponse.State.FAILED
     val text =
         when (status.state) {

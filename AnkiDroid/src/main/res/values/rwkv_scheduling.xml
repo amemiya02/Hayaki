@@ -4,6 +4,8 @@
 <resources>
     <string name="rwkv_scheduling_title">Schedule reviews with RWKV</string>
     <string name="rwkv_scheduling_summary">An RWKV model reads your review history and predicts how likely you are to recall each review card right now. A card comes due when that chance falls to its deck’s desired retention, and the cards you are most likely to have forgotten come first. New and learning cards are scheduled as usual. Anki’s stored due dates are never changed, so turning this off brings back your usual schedule at once.</string>
+    <string name="rwkv_daily_list_title">Keep today’s list</string>
+    <string name="rwkv_daily_list_summary">Choose the day’s reviews once, at your first study. Cards you finish don’t come back until tomorrow.</string>
     <string name="rwkv_status_waiting">Waiting to start</string>
     <string name="rwkv_status_downloading">Downloading the model</string>
     <string name="rwkv_status_preparing">Reading your review history: %1$d of %2$d</string>
