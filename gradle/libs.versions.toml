@@ -78,7 +78,7 @@ androidxWebkit = "1.16.0"
 androidxWork = "2.12.0"
 # The Hayaki Engine: https://github.com/amemiya02/Anki-Android-Backend/ (branch hayaki-rwkv), published to its
 # maven branch as upstream's version plus the Engine fork commit. Also update expectedPolicy in PageWebViewClientAssetTest
-ankiBackend = '0.1.77-anki26.09.4-hayaki.0eaefa527'
+ankiBackend = '0.1.77-anki26.09.4-hayaki.1ed7e833b'
 autoService = "1.1.1"
 autoServiceAnnotations = "1.1.1"
 # https://commons.apache.org/proper/commons-collections/changes.html

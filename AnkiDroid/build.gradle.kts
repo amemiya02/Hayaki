@@ -130,8 +130,8 @@ android {
         // Android's public version is its own, independent of iOS. versionCode keeps the inherited
         // monotonic build sequence and the release-type hundreds digit (3 = public).
         // Per-ABI prefixes are applied to this base below.
-        versionCode = 22600308
-        versionName = "0.3.2"
+        versionCode = 22600309
+        versionName = "0.3.3"
         testApplicationId = "com.ichi2.anki.tests"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "com.ichi2.testutils.NewCollectionPathTestRunner"
