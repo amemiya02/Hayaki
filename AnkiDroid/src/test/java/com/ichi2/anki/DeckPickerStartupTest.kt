@@ -3,6 +3,10 @@
 package com.ichi2.anki
 
 import android.content.SharedPreferences
+import android.widget.ProgressBar
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -11,6 +15,7 @@ import com.ichi2.anki.deckpicker.DeckPickerViewModel.AnkiDroidEnvironment
 import com.ichi2.anki.testutils.SingleViewModelFactory
 import com.ichi2.testutils.BackupManagerTestUtilities
 import kotlinx.coroutines.Job
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -31,6 +36,9 @@ import kotlin.time.Duration.Companion.seconds
 @RunWith(AndroidJUnit4::class)
 @Config(qualifiers = "normal")
 class DeckPickerStartupTest : RobolectricTest() {
+    @get:Rule
+    val compose = createEmptyComposeRule()
+
     override fun getCollectionStorageMode() = CollectionStorageMode.ON_DISK
 
     @Test
@@ -109,6 +117,9 @@ class DeckPickerStartupTest : RobolectricTest() {
                 // Complete a refresh with the collection still closed, as can happen onResume.
                 viewModel.updateDeckList().join()
                 assertFalse(CollectionManager.isOpenUnsafe(), "Startup must not have opened the collection yet")
+
+                assertTrue(activity.findViewById<ProgressBar>(R.id.progress_bar).isShown)
+                compose.onNode(SemanticsMatcher.keyIsDefined(SemanticsProperties.ProgressBarRangeInfo)).assertDoesNotExist()
 
                 releaseStartup.countDown()
                 viewModel.startupJob!!.join()

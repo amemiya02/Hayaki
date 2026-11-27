@@ -122,6 +122,7 @@
             android:name="com.ichi2.anki.IntentHandler"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:taskAffinity=""
+            android:excludeFromRecents="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
             >
@@ -362,6 +363,7 @@
             android:label="@string/fact_adder_intent_title"
             android:theme="@style/Theme_Dark.Launcher"
             android:taskAffinity=""
+            android:excludeFromRecents="true"
             android:exported="true"
             android:configChanges="keyboardHidden|orientation|screenSize"
             >

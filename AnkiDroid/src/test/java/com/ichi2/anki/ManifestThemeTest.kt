@@ -2,6 +2,7 @@
 
 package com.ichi2.anki
 
+import android.content.pm.ActivityInfo
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ichi2.anki.compat.CompatHelper.Companion.getPackageInfoCompat
 import com.ichi2.anki.compat.GET_ACTIVITIES_L
@@ -12,6 +13,8 @@ import com.ichi2.testutils.targetContext
 import com.ichi2.themes.Themes
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.empty
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.experimental.categories.Category
 import org.junit.runner.RunWith
@@ -44,6 +47,18 @@ class ManifestThemeTest : AndroidTest {
             // transparent window: the editor is displayed as a dialog over the caller
             "com.ichi2.anki.instantnoteeditor.InstantNoteEditorActivity" to R.style.Theme_AppCompat_Transparent_NoActionBar,
         )
+
+    @Test
+    fun `recent tasks show the deck picker and omit forwarding activities`() {
+        val flags = PackageInfoFlagsCompat.of(GET_ACTIVITIES_L)
+        val activities = requireNotNull(targetContext.getPackageInfoCompat(targetContext.packageName, flags)?.activities)
+
+        fun excluded(type: Class<*>) = activities.single { it.name == type.name }.flags and ActivityInfo.FLAG_EXCLUDE_FROM_RECENTS != 0
+
+        assertFalse(excluded(DeckPicker::class.java))
+        assertTrue(excluded(IntentHandler::class.java))
+        assertTrue(excluded(IntentHandler2::class.java))
+    }
 
     @Test
     fun `activities use the application theme`() {

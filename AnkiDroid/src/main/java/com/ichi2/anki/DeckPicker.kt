@@ -46,7 +46,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
@@ -869,7 +868,6 @@ open class DeckPicker :
             AnkiDroidTheme {
                 val state by viewModel.flowOfDeckListScreen.collectAsStateWithLifecycle()
                 val bottom = with(LocalDensity.current) { deckListBottomPadding.intValue.toDp() }
-                if (state == null) LinearProgressIndicator()
                 state?.let {
                     Column(modifier = if (isDeckListBehindAddMenu.value) Modifier.clearAndSetSemantics { } else Modifier) {
                         if (deckMediaStatus.intValue != 0) {
