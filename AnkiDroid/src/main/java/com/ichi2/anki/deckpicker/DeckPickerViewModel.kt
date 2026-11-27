@@ -13,6 +13,7 @@ import anki.collection.OpChanges
 import anki.decks.SetDeckCollapsedRequest
 import anki.i18n.GeneratedTranslations
 import anki.sync.SyncStatusResponse
+import anki.zz_hayaki.RwkvStatusResponse
 import com.ichi2.anki.AnkiDroidApp
 import com.ichi2.anki.CollectionManager
 import com.ichi2.anki.CollectionManager.TR
@@ -497,8 +498,6 @@ class DeckPickerViewModel :
             // uses user's desktop settings to determine whether a backup
             // actually happens
             launchCatchingIO { performBackupInBackground() }
-            // RWKV scheduling prepares in the background when its switch is on
-            launchCatchingIO { RwkvScheduling.prepareIfEnabled(AnkiDroidApp.instance) }
         }
         Timber.d("updateDeckList")
         reloadDeckCounts().join()
@@ -507,11 +506,28 @@ class DeckPickerViewModel :
     fun reloadDeckCounts(): Job {
         loadDeckCounts?.cancel()
         val loadDeckCounts =
-            viewModelScope.launch(Dispatchers.IO) {
+            launchCatchingIO {
                 Timber.d("Refreshing deck list")
-                withCol {
-                    dueTree = sched.deckDueTree()
-                    flowOfCollectionHasNoCards.value = isEmpty
+                var attemptedPreparation = false
+                while (true) {
+                    val published =
+                        withCol {
+                            val rwkv = config.get(RwkvScheduling.CONFIG_KEY, false) == true
+                            if (rwkv && backend.rwkvStatus().state != RwkvStatusResponse.State.READY) return@withCol false
+                            val tree = sched.deckDueTree()
+                            if (rwkv) {
+                                // Counting after sync can itself start a replay.
+                                val status = backend.rwkvStatus()
+                                if (status.state == RwkvStatusResponse.State.FAILED && attemptedPreparation) error(status.error)
+                                if (status.state != RwkvStatusResponse.State.READY) return@withCol false
+                            }
+                            dueTree = tree
+                            flowOfCollectionHasNoCards.value = isEmpty
+                            true
+                        }
+                    if (published) break
+                    RwkvScheduling.prepareIfEnabled(AnkiDroidApp.instance)
+                    attemptedPreparation = true
                 }
 
                 // TODO: This is in the wrong place

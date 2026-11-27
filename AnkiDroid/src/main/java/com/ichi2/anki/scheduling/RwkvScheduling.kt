@@ -9,6 +9,7 @@ import anki.zz_hayaki.RwkvWeights
 import com.ichi2.anki.CollectionManager.withCol
 import com.ichi2.anki.web.HttpFetcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import okhttp3.Request
 import java.io.File
@@ -45,7 +46,8 @@ object RwkvScheduling {
     ) = withContext(Dispatchers.IO) {
         val dir = weightsDirectory(context)
         val file = File(dir, weights.fileName)
-        if (file.exists() && weights.accepts(file.readBytes())) return@withContext
+        // The backend reads and verifies the cached file before loading it.
+        if (file.isFile && file.length() == weights.size) return@withContext
         val client = HttpFetcher.getOkHttpBuilder(false).build()
         val bytes =
             client.newCall(Request.Builder().url(weights.url).build()).execute().use { response ->
@@ -91,17 +93,22 @@ object RwkvScheduling {
         if (status.enabled) prepare(context)
     }
 
-    /**
-     * With the switch on, starts preparation. Study uses the upstream queue until it
-     * is ready, so a failure here only shows in Settings.
-     */
+    /** Wait outside the collection lock while the backend restores or replays the model. */
     suspend fun prepareIfEnabled(context: Context) {
-        val status = status()
-        if (status.enabled &&
-            status.state != RwkvStatusResponse.State.READY &&
-            status.state != RwkvStatusResponse.State.PREPARING
-        ) {
-            prepare(context)
+        var current = status()
+        if (current.enabled && current.state == RwkvStatusResponse.State.FAILED) current = prepare(context)
+        var pollDelayMs = 16L
+        while (current.enabled) {
+            when (current.state) {
+                RwkvStatusResponse.State.READY -> return
+                RwkvStatusResponse.State.NOT_PREPARED -> current = prepare(context)
+                RwkvStatusResponse.State.PREPARING -> {
+                    delay(pollDelayMs)
+                    pollDelayMs = (pollDelayMs * 2).coerceAtMost(250)
+                    current = status()
+                }
+                else -> throw IOException(current.error)
+            }
         }
     }
 }

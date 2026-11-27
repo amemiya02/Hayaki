@@ -3,9 +3,16 @@
 package com.ichi2.anki.scheduling
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import anki.zz_hayaki.RwkvStatusResponse.State
+import anki.zz_hayaki.rwkvStatusResponse
 import anki.zz_hayaki.rwkvWeights
 import com.ichi2.anki.RobolectricTest
 import com.ichi2.anki.scheduling.RwkvScheduling.accepts
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.mockk
+import io.mockk.mockkObject
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.security.MessageDigest
@@ -14,6 +21,22 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class RwkvSchedulingTest {
+    @Test
+    fun `deck counts wait for an ongoing restore`() =
+        runTest {
+            val preparing =
+                rwkvStatusResponse {
+                    enabled = true
+                    state = State.PREPARING
+                }
+            val ready = preparing.toBuilder().setState(State.READY).build()
+            mockkObject(RwkvScheduling) {
+                coEvery { RwkvScheduling.status() } returnsMany listOf(preparing, ready)
+                RwkvScheduling.prepareIfEnabled(mockk())
+                coVerify(exactly = 2) { RwkvScheduling.status() }
+            }
+        }
+
     private val bytes = "weights".toByteArray()
     private val weights =
         rwkvWeights {
